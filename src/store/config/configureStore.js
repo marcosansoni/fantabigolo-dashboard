@@ -8,7 +8,26 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';
 import rootReducer from './rootReducer';
 
-// const rootReducer = (state, action) => rootReducer(state, action);
+const saveState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('state', serializedState);
+  } catch {
+    // ignore write errors
+  }
+};
+
+const loadState = (state) => {
+  try {
+    const serializedState = localStorage.getItem('state');
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
+};
 
 const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
@@ -21,10 +40,19 @@ const configureStore = () => {
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     );
 
+  const persistentState = loadState();
+
   const store = createStore(
     rootReducer,
+    persistentState,
     composedMiddleware,
   );
+
+  store.subscribe(()=>{
+    saveState({
+      settings: store.getState().settings,
+    });
+  });
 
   sagaMiddleware.run(rootSaga);
 
