@@ -1,5 +1,5 @@
 import postLogin from '../method/postLogin';
-import { LOGIN } from '../sessionActionCreator';
+import { LOGIN, loginSuccess } from '../sessionActionCreator';
 import { put } from 'redux-saga/effects';
 import { snackbarActionCreator } from '../../message/messageActionCreator';
 import Severity from '../../message/constants/Severity';
@@ -18,9 +18,13 @@ function* loginWorker(action) {
     return yield put({type: LOGIN});
   }
 
-  if(response.message === "User not found"){
+  if(response?.message === "User not found"){
     yield put(snackbarActionCreator("User not found", Severity.ERROR))
     return yield put({type: LOGIN});
+  }
+
+  if(response?.code){
+    yield put(loginSuccess(username, response.code));
   }
 
 }

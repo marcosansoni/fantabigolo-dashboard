@@ -49,9 +49,7 @@ const configureStore = () => {
   );
 
   store.subscribe(()=>{
-    saveState({
-      settings: store.getState().settings,
-    });
+    saveState(store.getState());
   });
 
   sagaMiddleware.run(rootSaga);

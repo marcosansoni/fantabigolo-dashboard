@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button, Input } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Color } from '../assets/theme';
 import { loginActionCreator } from '../store/session/sessionActionCreator';
+import { getSession } from '../store/session/sessionSelector';
 
 const FullPage = styled.div`
   position: fixed;
@@ -66,9 +68,19 @@ const Link = styled.div`
   cursor: pointer;
 `;
 
-const Login = (props) => {
+const Login = () => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
+
+  const session = useSelector(getSession);
+  const history = useHistory();
+
+  useEffect(() => {
+    console.log('Current session ', session);
+    if (session) {
+      history.push('/');
+    }
+  }, [session]);
 
   const dispatch = useDispatch();
 

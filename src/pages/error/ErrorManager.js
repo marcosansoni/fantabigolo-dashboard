@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { CloseOutlined } from '@ant-design/icons';
@@ -40,6 +40,8 @@ const ErrorManager = () => {
   const selectedMessage = useSelector(getSnackbar);
   const dispatch = useDispatch();
 
+  const [isVisible, setIsVisible] = useState(true);
+
   const {
     text,
     severity,
@@ -55,7 +57,17 @@ const ErrorManager = () => {
 
   const color = getColorFromSeverity(severity, theme);
 
-  return !!text && (
+  useEffect(() => {
+    // Set snackbar visible at each message change
+    setIsVisible(true);
+    // After 5 seconds it closes in each case the snackbar
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [selectedMessage]);
+
+  return !!text && isVisible && (
     <Snackbar color={color}>
       <Container>
         <Closing onClick={handleCloseSnackbar}><CloseOutlined /></Closing>
