@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.2.2",
     "antd": "^4.6.2",
     "lodash": "^4.17.20",
     "moment": "^2.27.0",
