@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { CloseOutlined } from '@ant-design/icons';
-import { getMessage, getSnackbar } from '../../store/message/messageSelector';
-import { getColorFromSeverity } from '../../store/message/constants/Severity';
-import useTheme from '../../hooks/useTheme';
-import {
-  messageActionCreator,
-  snackbarActionCreator,
-} from '../../store/message/messageActionCreator';
+import { useSelector } from 'react-redux';
+import { getSnackbar } from '../../store/message/messageSelector';
 import { Color } from '../../assets/theme';
 
 const Snackbar = styled.div`

@@ -82,7 +82,7 @@ const Login = () => {
     if (session) {
       history.push('/');
     }
-  }, [session]);
+  }, [session, history]);
 
   const dispatch = useDispatch();
 
