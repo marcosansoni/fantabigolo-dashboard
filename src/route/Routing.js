@@ -1,4 +1,4 @@
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import React from 'react';
 import Routes from './Routes';
 import Login from '../pages/Login';
@@ -17,12 +17,13 @@ const Page = styled.div`
 const Routing = () => (
   <Page>
     <BrowserRouter>
-      <Route path={Routes.LOGIN}>
+      <Route exact path={Routes.LOGIN}>
         <Login />
       </Route>
-      <Route path={Routes.HOME}>
+      <Route exact path={Routes.HOME}>
         <Home />
       </Route>
+      {/*<Redirect to={Routes.HOME} />*/}
     </BrowserRouter>
     <ErrorManager />
   </Page>

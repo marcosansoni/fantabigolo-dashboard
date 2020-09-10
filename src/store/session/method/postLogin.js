@@ -1,4 +1,4 @@
-import postData from '../../utils/postData';
+import postData from '../../utils/fetchMethod/postData';
 import PathAPI, { BASE_PATH } from '../../../constants/PathAPI';
 
 // eslint-disable-next-line consistent-return

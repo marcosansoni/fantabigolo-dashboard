@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getSnackbar } from '../../store/message/messageSelector';
 import { Color } from '../../assets/theme';
+import { snackbarActionCreator } from '../../store/message/messageActionCreator';
 
 const Snackbar = styled.div`
   position: absolute;
@@ -26,25 +27,23 @@ const Container = styled.div`
 `;
 
 const ErrorManager = () => {
+  const dispatch = useDispatch();
   const selectedMessage = useSelector(getSnackbar);
-
-  const [isVisible, setIsVisible] = useState(true);
 
   const {
     text,
   } = selectedMessage || {};
 
   useEffect(() => {
-    // Set snackbar visible at each message change
-    setIsVisible(true);
     // After 5 seconds it closes in each case the snackbar
     const timer = setTimeout(() => {
-      setIsVisible(false);
+      // Dispatch action to remove message stored into redux
+      dispatch(snackbarActionCreator());
     }, 5000);
     return () => clearTimeout(timer);
   }, [selectedMessage]);
 
-  return !!text && isVisible && (
+  return !!text && (
     <Snackbar>
       <Container>
         {text}

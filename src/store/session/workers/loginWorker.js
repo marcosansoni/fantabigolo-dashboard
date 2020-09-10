@@ -11,21 +11,31 @@ function* loginWorker(action) {
     password,
   } = action?.payload || {};
 
-  const response = yield postLogin({username, password});
+  const {
+    data,
+    status,
+  } = yield postLogin({username, password});
+
+  console.log(status)
+  // console.log(response.response.data)
+
+  console.log(data)
 
   // Stop fetching
-  if(!response){
-    return yield put({type: LOGIN});
-  }
+  // if(!response){
+  //   return yield put({type: LOGIN});
+  // }
 
-  if(response?.message === "User not found"){
+  if(status === 404){
     yield put(snackbarActionCreator("User not found", Severity.ERROR))
     return yield put({type: LOGIN});
   }
 
-  if(response?.code){
-    yield put(loginSuccess(username, response.code));
+  if(status === 200){
+    yield put(loginSuccess(username, data.code));
   }
+
+  return yield put({type: LOGIN});
 
 }
 

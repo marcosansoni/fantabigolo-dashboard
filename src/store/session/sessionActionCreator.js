@@ -1,5 +1,7 @@
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN = 'LOGIN';
+
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT = 'LOGOUT';
 
 export const loginActionCreator = (username, password) => ({
@@ -19,5 +21,5 @@ export const loginSuccess = (username, session) => ({
 });
 
 export const logoutActionCreator = () => ({
-  type: LOGOUT,
+  type: LOGOUT_REQUEST,
 });

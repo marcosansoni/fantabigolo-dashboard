@@ -1,5 +1,6 @@
 const PathAPI = {
   LOGIN: '/login',
+  LOGOUT: '/logout',
   REGISTER: '/register',
 };
 

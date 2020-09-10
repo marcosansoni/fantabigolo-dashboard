@@ -78,11 +78,10 @@ const Login = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log('Current session ', session);
     if (session) {
       history.push('/');
     }
-  }, [session, history]);
+  }, [session]);
 
   const dispatch = useDispatch();
 
