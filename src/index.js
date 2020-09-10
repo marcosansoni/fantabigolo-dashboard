@@ -15,7 +15,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme[currentTheme]}>
       <Provider store={store}>
-        <Routing/>
+        <Routing />
       </Provider>
     </ThemeProvider>
   </React.StrictMode>,

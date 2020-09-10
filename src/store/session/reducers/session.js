@@ -1,11 +1,16 @@
-import { LOGIN } from '../sessionActionCreator';
+import { LOGIN, LOGOUT } from '../sessionActionCreator';
 
 const session = (state = null, action) => {
-  if(action.type === LOGIN){
-    if(action?.payload?.session){
-      return action.payload.session;
-    }
-    return state;
+  switch(action.type){
+    case LOGIN:
+      if(action?.payload?.session){
+        return action.payload.session;
+      }
+      break;
+    case LOGOUT:
+      return null;
+    default:
+      return state;
   }
   return state;
 };

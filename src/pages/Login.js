@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Color } from '../assets/theme';
 import { loginActionCreator } from '../store/session/sessionActionCreator';
-import { getSession } from '../store/session/sessionSelector';
+import { getFetchingLogin, getSession } from '../store/session/sessionSelector';
 
 const FullPage = styled.div`
   position: fixed;
@@ -73,6 +73,8 @@ const Login = () => {
   const [password, setPassword] = useState(null);
 
   const session = useSelector(getSession);
+  const isFetchingLogin = useSelector(getFetchingLogin);
+
   const history = useHistory();
 
   useEffect(() => {
@@ -107,8 +109,9 @@ const Login = () => {
           />
           <Button
             onClick={handleLogin}
+            loading={isFetchingLogin}
           >
-            Login
+            <span style={{ padding: 8 }}>Login</span>
           </Button>
           <RegisterText>
             Non sei ancora utente?
