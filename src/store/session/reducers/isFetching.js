@@ -1,13 +1,18 @@
-import { LOGIN, LOGIN_REQUEST } from '../sessionActionCreator';
+import {
+  LOGIN, LOGIN_REQUEST, REGISTER, REGISTER_REQUEST,
+} from '../sessionActionCreator';
 
 const session = (state = false, action) => {
-  if (action.type === LOGIN_REQUEST) {
-    return true;
+  switch (action.type) {
+    case LOGIN_REQUEST:
+    case REGISTER_REQUEST:
+      return true;
+    case LOGIN:
+    case REGISTER:
+      return false;
+    default:
+      return state;
   }
-  if (action.type === LOGIN) {
-    return false;
-  }
-  return state;
 };
 
 export default session;

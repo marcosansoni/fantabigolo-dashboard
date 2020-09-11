@@ -4,6 +4,9 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT = 'LOGOUT';
 
+export const REGISTER_REQUEST = 'REGISTER_REQUEST';
+export const REGISTER = 'REGISTER';
+
 export const loginActionCreator = (username, password) => ({
   type: LOGIN_REQUEST,
   payload: {
@@ -17,6 +20,32 @@ export const loginSuccess = (username, session) => ({
   payload: {
     username,
     session,
+  },
+});
+
+export const registerActionCreator = (username, password, email, firstName, lastName, photo) => ({
+  type: REGISTER_REQUEST,
+  payload: {
+    username,
+    password,
+    email,
+    firstName,
+    lastName,
+    photo,
+  },
+});
+
+export const registerSuccess = ({
+  username, email, firstName, lastName, photo, session,
+}) => ({
+  type: REGISTER,
+  payload: {
+    username,
+    session,
+    firstName,
+    lastName,
+    photo,
+    email,
   },
 });
 

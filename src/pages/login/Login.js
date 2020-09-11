@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { Button, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Color } from '../assets/theme';
-import { loginActionCreator } from '../store/session/sessionActionCreator';
-import { getFetchingLogin, getSession } from '../store/session/sessionSelector';
+import { Color } from '../../assets/theme';
+import { loginActionCreator } from '../../store/session/sessionActionCreator';
+import { getFetchingLogin, getSession } from '../../store/session/sessionSelector';
+import Routes from '../../route/Routes';
 
 const FullPage = styled.div`
   position: fixed;
@@ -27,6 +28,7 @@ const Border = styled.div`
   width: 320px;
   max-height: 460px;
   box-sizing: border-box;
+  box-shadow: 2px 12px 24px rgba(51, 51, 51, 0.08);
 `;
 
 const Box = styled.div`
@@ -41,16 +43,18 @@ const Box = styled.div`
 const StyledInput = styled(Input)`
   height: 40px;
   padding: 8px;
-  margin: 16px 0;
+  margin: 8px 0;
 `;
 
 const Title = styled.div`
   width: 100%;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 16px;
+  color: ${p => p.theme[Color.PRIMARY_VARIANT]};
 `;
 
 const RegisterText = styled.div`
@@ -64,7 +68,7 @@ const RegisterText = styled.div`
 const Link = styled.div`
   color: ${(p) => p.theme[Color.PRIMARY_VARIANT]};
   font-weight: bold;
-  padding-left: 8px;
+  padding-left: 4px;
   cursor: pointer;
 `;
 
@@ -93,7 +97,7 @@ const Login = () => {
     <FullPage>
       <Border>
         <Box>
-          <Title>LOGIN</Title>
+          <Title>Fantabigolo</Title>
           <StyledInput
             placeholder="Nome utente"
             value={username}
@@ -109,12 +113,13 @@ const Login = () => {
           <Button
             onClick={handleLogin}
             loading={isFetchingLogin}
+            style={{ marginTop: 16 }}
           >
             <span style={{ padding: 8 }}>Login</span>
           </Button>
           <RegisterText>
             Non sei ancora utente?
-            <Link>Registrati</Link>
+            <Link onClick={() => history.push(Routes.REGISTER)}>Registrati</Link>
           </RegisterText>
         </Box>
       </Border>

@@ -1,8 +1,9 @@
-import { LOGIN, LOGOUT } from '../sessionActionCreator';
+import { LOGIN, LOGOUT, REGISTER } from '../sessionActionCreator';
 
 const session = (state = null, action) => {
   switch(action.type){
     case LOGIN:
+    case REGISTER:
       if(action?.payload?.session){
         return action.payload.session;
       }

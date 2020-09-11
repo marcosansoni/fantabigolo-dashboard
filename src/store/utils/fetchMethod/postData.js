@@ -1,10 +1,4 @@
 import axios from 'axios';
-import { rejectUndefinedError } from '../common';
-
-const headers = {
-  Accept: 'application/json',
-  'Content-Type': 'application/json',
-};
 
 function* postData({ url, data }) {
   return yield axios.post(
