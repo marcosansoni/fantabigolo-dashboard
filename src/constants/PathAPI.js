@@ -2,6 +2,7 @@ const PathAPI = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   REGISTER: '/register',
+  USER: '/user',
 };
 
 // export const BASE_PATH = 'https://fantabigolo.herokuapp.com';

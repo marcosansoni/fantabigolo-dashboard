@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSnackbar } from '../../store/message/messageSelector';
@@ -41,7 +41,7 @@ const ErrorManager = () => {
       dispatch(snackbarActionCreator());
     }, 5000);
     return () => clearTimeout(timer);
-  }, [selectedMessage]);
+  }, [selectedMessage, dispatch]);
 
   return !!text && (
     <Snackbar>

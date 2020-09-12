@@ -4,10 +4,7 @@ import { Button, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Color } from '../../assets/theme';
-import {
-  loginActionCreator,
-  registerActionCreator
-} from '../../store/session/sessionActionCreator';
+import { registerActionCreator, } from '../../store/session/sessionActionCreator';
 import { getFetchingLogin, getSession } from '../../store/session/sessionSelector';
 import Routes from '../../route/Routes';
 
@@ -97,7 +94,7 @@ const Register = () => {
     if (session) {
       history.push('/');
     }
-  }, [session]);
+  }, [session, history]);
 
   const dispatch = useDispatch();
 

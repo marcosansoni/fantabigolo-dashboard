@@ -1,11 +1,13 @@
 import { Button } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { getSession, getUsername } from '../../store/session/sessionSelector';
+import { getUsername } from '../../store/session/sessionSelector';
 import { logoutActionCreator } from '../../store/session/sessionActionCreator';
-import Routes from '../../route/Routes';
+import ContainerPage from '../../components/layout/ContainerPage';
+import Toolbar from '../../components/layout/Toolbar/Toolbar';
+import FantaDropdown from '../../components/layout/Toolbar/dropdown/FantaDropdown';
+import { userInfoActionCreator } from '../../store/user/userActionCreator';
 
 const Center = styled.div`
   width: 100%;
@@ -16,8 +18,12 @@ const Center = styled.div`
   flex-direction: column;
 `;
 
+const ToolbarOptions = {
+  FANTALEGHE: 'Fantaleghe',
+  REAL_WORLD: 'Real World',
+};
+
 const Home = () => {
-  const session = useSelector(getSession);
   const username = useSelector(getUsername);
   const dispatch = useDispatch();
 
@@ -25,11 +31,28 @@ const Home = () => {
     dispatch(logoutActionCreator());
   };
 
+  const renderDropdown = (option) => {
+    if (option === ToolbarOptions.FANTALEGHE) {
+      return (<FantaDropdown />);
+    }
+  };
+
+  const renderToolbar = () => (
+    <Toolbar
+      options={[ToolbarOptions.FANTALEGHE, ToolbarOptions.REAL_WORLD]}
+      renderDropdown={renderDropdown}
+    />
+  );
+
+  useEffect(() => {
+    dispatch(userInfoActionCreator(username));
+  }, [username, dispatch]);
+
   return (
-    <Center>
-      {session && (
+    <ContainerPage toolbar={renderToolbar()}>
+      <Center>
         <>
-          <div style={{padding: 8}}>
+          <div style={{ padding: 8 }}>
             Successful login as
             {' '}
             {username}
@@ -38,12 +61,8 @@ const Home = () => {
             LOGOUT
           </Button>
         </>
-      )}
-      {!session && 'You will be redirected to login'}
-      {!session && (
-        <Redirect to={Routes.LOGIN} />
-      )}
-    </Center>
+      </Center>
+    </ContainerPage>
   );
 };
 

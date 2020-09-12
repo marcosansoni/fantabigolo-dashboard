@@ -1,9 +1,11 @@
-import { LOGOUT, REGISTER } from '../sessionActionCreator';
+import { LOGOUT, REGISTER } from '../../session/sessionActionCreator';
+import { USER_INFO } from '../userActionCreator';
 
 const lastName = (state = null, action) => {
-  switch(action.type){
+  switch (action.type) {
     case REGISTER:
-      if(action?.payload?.lastName){
+    case USER_INFO:
+      if (action?.payload?.lastName) {
         return action.payload.lastName;
       }
       break;

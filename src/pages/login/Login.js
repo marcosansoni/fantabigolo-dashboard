@@ -54,7 +54,7 @@ const Title = styled.div`
   justify-content: center;
   align-items: center;
   padding-bottom: 16px;
-  color: ${p => p.theme[Color.PRIMARY_VARIANT]};
+  color: ${(p) => p.theme[Color.PRIMARY_VARIANT]};
 `;
 
 const RegisterText = styled.div`
@@ -85,9 +85,11 @@ const Login = () => {
     if (session) {
       history.push('/');
     }
-  }, [session]);
+  }, [session, history]);
 
   const dispatch = useDispatch();
+
+  console.log('dentro login');
 
   const handleLogin = () => {
     dispatch(loginActionCreator(username, password));
