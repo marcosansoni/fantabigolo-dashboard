@@ -1,6 +1,6 @@
 import { put } from 'redux-saga/effects';
 import postLogin from '../method/postLogin';
-import { REGISTER, registerSuccess, } from '../sessionActionCreator';
+import { REGISTER, registerSuccess } from '../sessionActionCreator';
 import { snackbarActionCreator } from '../../message/messageActionCreator';
 import Severity from '../../message/constants/Severity';
 import postRegister from '../method/postRegister';
@@ -15,7 +15,7 @@ function* registerWorker(action) {
     photo = 'null',
   } = action?.payload || {};
 
-  const { status } = yield postRegister({
+  const response = yield postRegister({
     username,
     password,
     firstname: firstName,
@@ -23,6 +23,10 @@ function* registerWorker(action) {
     email,
     photo,
   });
+
+  const {
+    status,
+  } = response || {};
 
   if (status === 500) {
     yield put(snackbarActionCreator('Wrong parameter', Severity.ERROR));
@@ -32,12 +36,14 @@ function* registerWorker(action) {
   if (status === 200) {
     yield put(snackbarActionCreator('Utente creato con successo', Severity.ERROR));
 
+    const responseLogin = yield postLogin({ username, password });
+
     const {
       status: statusLogin,
       data: dataLogin,
-    } = yield postLogin({ username, password });
+    } = responseLogin || {};
 
-    const { code: session } = dataLogin;
+    const { code: session } = dataLogin || {};
 
     if (statusLogin === 200) {
       return yield put(registerSuccess({

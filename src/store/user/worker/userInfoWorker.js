@@ -9,10 +9,12 @@ function* userInfoWorker(action) {
     username,
   } = action?.payload || {};
 
+  const response = yield getUser({ username });
+
   const {
     data,
     status,
-  } = yield getUser({ username });
+  } = response || {};
 
   if (status === 404) {
     yield put(snackbarActionCreator('User not found', Severity.ERROR));
