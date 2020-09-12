@@ -89,8 +89,6 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  console.log('dentro login');
-
   const handleLogin = () => {
     dispatch(loginActionCreator(username, password));
   };

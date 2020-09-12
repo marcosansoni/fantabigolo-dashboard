@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSnackbar } from '../../store/message/messageSelector';
@@ -30,18 +30,19 @@ const ErrorManager = () => {
   const dispatch = useDispatch();
   const selectedMessage = useSelector(getSnackbar);
 
-  const {
-    text,
-  } = selectedMessage || {};
+  const [text, setText] = useState(selectedMessage && selectedMessage.text);
+
+  console.log(selectedMessage);
 
   useEffect(() => {
+    dispatch(snackbarActionCreator());
     // After 5 seconds it closes in each case the snackbar
     const timer = setTimeout(() => {
       // Dispatch action to remove message stored into redux
-      dispatch(snackbarActionCreator());
+      setText(null);
     }, 5000);
     return () => clearTimeout(timer);
-  }, [selectedMessage, dispatch]);
+  }, [text, dispatch]);
 
   return !!text && (
     <Snackbar>

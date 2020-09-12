@@ -5,7 +5,6 @@ const PathAPI = {
   USER: '/user',
 };
 
-// export const BASE_PATH = 'https://fantabigolo.herokuapp.com';
-export const BASE_PATH = 'http://localhost:5000';
+export const BASE_PATH = process.env.REACT_APP_BASE_PATH;
 
 export default PathAPI;
