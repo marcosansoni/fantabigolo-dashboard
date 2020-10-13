@@ -1,62 +1,114 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+import { UserOutlined } from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import Routes from '../../route/Routes';
+import { userInfoActionCreator } from '../../store/user/userActionCreator';
+import { friendsListActionCreator } from '../../store/friends/friendsActionCreator';
+import { getUsername } from '../../store/session/sessionSelector';
+import { getUserInfo } from '../../store/user/userSelector';
 import { Color } from '../../assets/theme';
+import useTheme from '../../hooks/useTheme';
+import Grid from '../grid/Grid';
 
-const FullPage = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: ${(p) => p.theme[Color.BACKGROUND]};
+const { Header, Content } = Layout;
+const { SubMenu } = Menu;
+
+const ItemShow = styled(Menu.Item)`
+  color: ${(p) => p.theme[Color.TEXT]};
+  cursor: default;
+  
+  :hover{
+    color: ${(p) => p.theme[Color.TEXT]};
+  }
 `;
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  max-width: 1200px;
-`;
-
-const Toolbar = styled.div`
-  height: 64px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  background-color: ${(p) => p.theme[Color.SECONDARY]};
-  border-bottom: ${(p) => `1px solid ${p.theme[Color.BORDER]}`};
-  box-shadow: 2px 12px 24px rgba(51, 51, 51, 0.08);
-`;
+export const ToolbarItem = {
+  FANTALEAGUE: 'FANTALEAGUE',
+  REAL_WORLD: 'REAL_WORLD',
+  PROFILE: 'PROFILE',
+  SETTINGS: 'SETTINGS',
+  LOGOUT: 'LOGOUT',
+};
 
 const ContainerPage = (props) => {
   const {
     children,
-    toolbar,
+    selectedItem,
   } = props;
 
+  const username = useSelector(getUsername);
+  const userInfo = useSelector(getUserInfo);
+  const dispatch = useDispatch();
+
+  const { theme } = useTheme();
+
+  const history = useHistory();
+
+  const handleClickMenuItem = ({ key }) => {
+    switch (key) {
+      case ToolbarItem.FANTALEAGUE:
+        return history.push(Routes.FANTALEAGUE.HOME);
+      case ToolbarItem.REAL_WORLD:
+        return history.push(Routes.REAL_WORLD.HOME);
+      case ToolbarItem.LOGOUT:
+        return history.push(Routes.LOGOUT);
+      case ToolbarItem.SETTINGS:
+        return history.push(Routes.SETTINGS);
+      default:
+        return null;
+    }
+  };
+
+  useEffect(() => {
+    dispatch(userInfoActionCreator(username));
+    dispatch(friendsListActionCreator(username));
+  }, [username, dispatch]);
+
+  const {
+    firstName,
+    lastName,
+    email,
+  } = userInfo;
+
   return (
-    <FullPage>
-      <Toolbar>
-        <Container>
-          {toolbar}
-        </Container>
-      </Toolbar>
-      <Container>
-        {children}
-      </Container>
-    </FullPage>
+    <Layout>
+      <Header style={{
+        position: 'fixed', zIndex: 1, width: '100%', padding: 0,
+      }}
+      >
+        <Menu mode="horizontal" defaultSelectedKeys={[selectedItem]} onClick={handleClickMenuItem}>
+          <Menu.Item key={ToolbarItem.FANTALEAGUE}>Fantaleghe</Menu.Item>
+          <Menu.Item key={ToolbarItem.REAL_WORLD}>Serie A</Menu.Item>
+          <SubMenu key={ToolbarItem.PROFILE} icon={<UserOutlined />} title="Profilo" style={{ position: 'absolute', right: 0 }}>
+            <ItemShow key="infoFirstLastName">{`${firstName} ${lastName}`}</ItemShow>
+            <ItemShow key="infoEmail">{email}</ItemShow>
+            <Menu.Divider />
+            <Menu.Item key={ToolbarItem.SETTINGS}>Impostazioni</Menu.Item>
+            <Menu.Item key={ToolbarItem.LOGOUT}>Log out</Menu.Item>
+          </SubMenu>
+        </Menu>
+      </Header>
+      <Content style={{ marginTop: 64, backgroundColor: theme[Color.BACKGROUND] }}>
+        <Grid style={{ padding: 24 }}>
+          {children}
+        </Grid>
+      </Content>
+    </Layout>
   );
 };
 
 ContainerPage.propTypes = {
   children: PropTypes.any,
-  toolbar: PropTypes.any,
+  selectedItem: PropTypes.string,
 };
 
 ContainerPage.defaultProps = {
   children: undefined,
-  toolbar: undefined,
+  selectedItem: undefined,
 };
 
 export default ContainerPage;

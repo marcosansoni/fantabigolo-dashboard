@@ -2,9 +2,17 @@ const PathAPI = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   REGISTER: '/register',
-  USER: '/user',
+  USER: {
+    ALL: '/user',
+    FRIENDS: '/user/friend',
+  },
+  FANTALEAGUE: {
+    NEW: '/fantaleague/create',
+  },
 };
 
-export const BASE_PATH = process.env.REACT_APP_BASE_PATH;
+const BASE_PATH = process.env.REACT_APP_BASE_PATH;
+
+export const urlFactory = (endpoint = '') => BASE_PATH + endpoint;
 
 export default PathAPI;

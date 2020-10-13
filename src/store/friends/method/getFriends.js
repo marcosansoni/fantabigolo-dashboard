@@ -1,11 +1,11 @@
-import postData from '../../utils/fetchMethod/postData';
 import PathAPI, { urlFactory } from '../../../constants/PathAPI';
+import getData from '../../utils/fetchMethod/getData';
 
 // eslint-disable-next-line consistent-return
-function* postLogin(data) {
+function* getFriends(data) {
   try {
-    return yield postData({
-      url: urlFactory(PathAPI.LOGIN),
+    return yield getData({
+      url: urlFactory(PathAPI.FRIENDS),
       data,
     });
   } catch (e) {
@@ -13,4 +13,4 @@ function* postLogin(data) {
   }
 }
 
-export default postLogin;
+export default getFriends;

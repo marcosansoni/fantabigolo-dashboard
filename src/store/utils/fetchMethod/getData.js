@@ -6,8 +6,6 @@ function* getData({ url, data }) {
   // Get the session used for api call
   const sessionID = yield select(getSession);
 
-  console.log(url, data);
-
   return yield axios.get(
     url,
     {

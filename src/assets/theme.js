@@ -53,6 +53,7 @@ export const Color = {
   PRIMARY_STANDARD: 'primaryStandard',
   SECONDARY: 'secondary',
   BACKGROUND: 'background',
+  LIGHT_BACKGROUND: 'lightBackground',
   SURFACE: 'surface',
   OVERLAY: 'overlay',
   SUCCESS: 'success',
@@ -82,6 +83,7 @@ const defaultTheme = {
   [Color.PRIMARY_STANDARD]: palette.PRIMARY_STANDARD,
   [Color.SECONDARY]: palette.GREY_SUPER_LIGHT,
   [Color.BACKGROUND]: palette.WHITE,
+  [Color.LIGHT_BACKGROUND]: palette.SECONDARY_PALE,
   [Color.SURFACE]: palette.GREY_SUPER_LIGHT,
   [Color.OVERLAY]: palette.BLACK, // with opacity: 0.25;
   [Color.SUCCESS]: palette.SECONDARY_SUCCESS,
@@ -111,6 +113,7 @@ const darkTheme = {
   [Color.PRIMARY_STANDARD]: palette.PRIMARY_DARK,
   [Color.SECONDARY]: palette.GREY_DARK,
   [Color.BACKGROUND]: palette.BLACK,
+  [Color.LIGHT_BACKGROUND]: palette.SECONDARY_PALE,
   [Color.SURFACE]: palette.GREY_DARK,
   [Color.OVERLAY]: palette.GREY_SUPER_LIGHT, // with opacity: 0.25;
   [Color.SUCCESS]: palette.THIRD_SUCCESS,
