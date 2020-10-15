@@ -19,7 +19,8 @@ function* createFantaLeagueWorker(action) {
       partecipants,
     };
 
-    console.log(urlFactory(PathAPI.FANTALEAGUE.NEW))
+    console.log(urlFactory(PathAPI.FANTALEAGUE.NEW));
+    console.log(data)
 
     const response = yield postData({ url: urlFactory(PathAPI.FANTALEAGUE.NEW), data });
     console.log(response);
