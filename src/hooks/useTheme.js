@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import { getTheme } from '../store/settings/settingsSelector';
 import theme from '../assets/theme';
+import themeSelector from '../store/setting/selectors/themeSelector';
 
 const useTheme = () => {
-  const selectedTheme = useSelector(getTheme);
+  const selectedTheme = useSelector(themeSelector);
 
   return {
     theme: theme[selectedTheme],

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button, Input } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Color } from '../../assets/theme';
-import { loginActionCreator } from '../../store/session/sessionActionCreator';
-import { getFetchingLogin, getSession } from '../../store/session/sessionSelector';
 import Routes from '../../route/Routes';
+import useActionCreator from '../../store/utils/useActionCreator';
+import SessionActionType from '../../store/session/SessionActionType';
+import sessionSelector from '../../store/session/selectors/sessionSelector';
+import sessionFetchingSelector from '../../store/session/selectors/sessionFetchingSelector';
 
 const FullPage = styled.div`
   position: fixed;
@@ -76,8 +79,8 @@ const Login = () => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
-  const session = useSelector(getSession);
-  const isFetchingLogin = useSelector(getFetchingLogin);
+  const { session } = useSelector(sessionSelector);
+  const isFetchingSession = useSelector(sessionFetchingSelector);
 
   const history = useHistory();
 
@@ -87,11 +90,16 @@ const Login = () => {
     }
   }, [session, history]);
 
-  const dispatch = useDispatch();
+  const postLogin = useActionCreator(SessionActionType.POST_LOGIN_REQUEST);
 
   const handleLogin = () => {
-    dispatch(loginActionCreator(username, password));
+    postLogin({
+      username,
+      password,
+    });
   };
+
+  const { t } = useTranslation();
 
   return (
     <FullPage>
@@ -99,27 +107,27 @@ const Login = () => {
         <Box>
           <Title>Fantabigolo</Title>
           <StyledInput
-            placeholder="Nome utente"
+            placeholder={t('login.placeholder.username')}
             value={username}
             type="text"
             onChange={(e) => setUsername(e.target.value)}
           />
           <StyledInput
-            placeholder="Password"
+            placeholder={t('login.placeholder.password')}
             value={password}
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button
             onClick={handleLogin}
-            loading={isFetchingLogin}
+            loading={isFetchingSession}
             style={{ marginTop: 16 }}
           >
-            <span style={{ padding: 8 }}>Login</span>
+            <span>Login</span>
           </Button>
           <RegisterText>
-            Non sei ancora utente?
-            <Link onClick={() => history.push(Routes.REGISTER)}>Registrati</Link>
+            {t('login.notYetUser')}
+            <Link onClick={() => history.push(Routes.REGISTER)}>{t('login.register')}</Link>
           </RegisterText>
         </Box>
       </Border>

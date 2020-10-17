@@ -1,14 +1,17 @@
 import { put, select } from 'redux-saga/effects';
-import { LOGOUT } from '../sessionActionCreator';
-import { getUsername } from '../sessionSelector';
-import deleteLogout from '../method/deleteLogout';
+import PathAPI, { urlFactory } from '../../../constants/PathAPI';
+import deleteData from '../../utils/fetchMethod/deleteData';
+import SessionActionType from '../SessionActionType';
+import sessionSelector from '../selectors/sessionSelector';
 
 function* logoutWorker() {
-  const username = yield select(getUsername);
+  const { username } = yield select(sessionSelector);
 
-  yield deleteLogout({ username });
+  yield deleteData({ url: urlFactory(PathAPI.LOGOUT), data: { username } });
 
-  return yield put({ type: LOGOUT });
+  // yield deleteLogout({ username });
+
+  return yield put({ type: SessionActionType.POST_LOGOUT });
 
   // console.log(response)
   //

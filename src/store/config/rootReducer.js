@@ -1,12 +1,16 @@
 import { combineReducers } from 'redux';
-import settingsCombinedReducers from '../settings/settingsCombinedReducers';
-import sessionCombinedReducers from '../session/sessionCombinedReducers';
-import messageCombinedReducers from '../message/messageCombinedReducers';
-import userCombinedReducers from '../user/userCombinedReducers';
+import UserCombinedReducers from '../user/UserCombinedReducers';
+import MessageCombinedReducers from '../message/MessageCombinedReducers';
+import SessionCombinedReducers from '../session/SessionCombinedReducers';
+import SettingCombinedReducers from '../setting/SettingCombinedReducers';
+import FriendCombinedReducers from '../friend/FriendCombinedReducers';
+import FantaleagueCombinedReducers from '../fantaleague/FantaleagueCombinedReducers';
 
 export default combineReducers({
-  settings: settingsCombinedReducers,
-  session: sessionCombinedReducers,
-  message: messageCombinedReducers,
-  user: userCombinedReducers,
+  setting: SettingCombinedReducers,
+  session: SessionCombinedReducers,
+  message: MessageCombinedReducers,
+  user: UserCombinedReducers,
+  friend: FriendCombinedReducers,
+  fantaleague: FantaleagueCombinedReducers,
 });

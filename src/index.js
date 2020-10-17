@@ -12,7 +12,7 @@ import 'antd/dist/antd.css';
 
 const store = configureStore();
 
-const currentTheme = store.getState().settings.theme;
+const currentTheme = store.getState().setting.theme;
 
 ReactDOM.render(
   <I18nextProvider i18n={i18n}>

@@ -1,17 +1,14 @@
-/** root */
 import { all } from 'redux-saga/effects';
-import settingsWatchers from '../settings/settingsWatchers';
-import sessionWatchers from '../session/sessionWatchers';
-import userWatchers from '../user/userWatchers';
-import friendsWatchers from '../friends/friendsWatchers';
-import fantaLeagueWatchers from '../fantaleague/fantaLeagueWatchers';
+import FantaleagueWatcher from '../fantaleague/FantaleagueWatcher';
+import FriendWatcher from '../friend/FriendWatcher';
+import UserWatcher from '../user/UserWatcher';
+import SessionWatcher from '../session/SessionWatcher';
 
 export default function* rootSaga() {
   yield all([
-    ...settingsWatchers,
-    ...sessionWatchers,
-    ...userWatchers,
-    ...friendsWatchers,
-    ...fantaLeagueWatchers,
+    ...FantaleagueWatcher,
+    ...FriendWatcher,
+    ...UserWatcher,
+    ...SessionWatcher,
   ]);
 }

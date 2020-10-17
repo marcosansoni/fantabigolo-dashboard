@@ -1,14 +1,12 @@
-import {
-  LOGIN, LOGIN_REQUEST, REGISTER, REGISTER_REQUEST,
-} from '../sessionActionCreator';
+import SessionActionType from '../SessionActionType';
 
 const session = (state = false, action) => {
   switch (action.type) {
-    case LOGIN_REQUEST:
-    case REGISTER_REQUEST:
+    case SessionActionType.POST_LOGIN_REQUEST:
+    case SessionActionType.POST_REGISTER_REQUEST:
       return true;
-    case LOGIN:
-    case REGISTER:
+    case SessionActionType.POST_LOGIN:
+    case SessionActionType.POST_REGISTER:
       return false;
     default:
       return state;

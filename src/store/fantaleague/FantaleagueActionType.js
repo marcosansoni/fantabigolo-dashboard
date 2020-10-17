@@ -1,0 +1,10 @@
+const FantaleagueActionType = {
+  // Creation of a fanta league
+  CREATE_FANTA_LEAGUE_REQUEST: 'CREATE_FANTA_LEAGUE_REQUEST',
+  CREATE_FANTA_LEAGUE: 'CREATE_FANTA_LEAGUE',
+  // Get a fanta league by username
+  GET_FANTA_LEAGUE_BY_USERNAME_REQUEST: 'GET_FANTA_LEAGUE_BY_USERNAME_REQUEST',
+  GET_FANTA_LEAGUE_BY_USERNAME: 'GET_FANTA_LEAGUE_BY_USERNAME',
+};
+
+export default FantaleagueActionType;

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSnackbar } from '../../store/message/messageSelector';
 import { Color } from '../../assets/theme';
-import { snackbarActionCreator } from '../../store/message/messageActionCreator';
+import useActionCreator from '../../store/utils/useActionCreator';
+import MessageActionType from '../../store/message/MessageActionType';
+import snackbarSelector from '../../store/message/selectors/snackbarSelector';
 
 const Snackbar = styled.div`
   position: absolute;
@@ -27,22 +28,22 @@ const Container = styled.div`
 `;
 
 const ErrorManager = () => {
-  const dispatch = useDispatch();
-  const selectedMessage = useSelector(getSnackbar);
+  const { text: defaultText } = useSelector(snackbarSelector);
 
-  const [text, setText] = useState(selectedMessage && selectedMessage.text);
+  const [text, setText] = useState(defaultText);
 
-  console.log(selectedMessage);
+  const resetSnackbar = useActionCreator(MessageActionType.SNACKBAR);
 
   useEffect(() => {
-    dispatch(snackbarActionCreator());
+    if (defaultText && defaultText !== text) setText(defaultText);
+    resetSnackbar();
     // After 5 seconds it closes in each case the snackbar
     const timer = setTimeout(() => {
       // Dispatch action to remove message stored into redux
       setText(null);
     }, 5000);
     return () => clearTimeout(timer);
-  }, [text, dispatch]);
+  }, [defaultText]);
 
   return !!text && (
     <Snackbar>

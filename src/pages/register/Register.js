@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button, Input } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Color } from '../../assets/theme';
-import { registerActionCreator, } from '../../store/session/sessionActionCreator';
-import { getFetchingLogin, getSession } from '../../store/session/sessionSelector';
 import Routes from '../../route/Routes';
+import useActionCreator from '../../store/utils/useActionCreator';
+import SessionActionType from '../../store/session/SessionActionType';
+import sessionSelector from '../../store/session/selectors/sessionSelector';
+import sessionFetchingSelector from '../../store/session/selectors/sessionFetchingSelector';
 
 const FullPage = styled.div`
   position: fixed;
@@ -85,8 +87,8 @@ const Register = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
 
-  const session = useSelector(getSession);
-  const isFetching = useSelector(getFetchingLogin);
+  const { session } = useSelector(sessionSelector);
+  const isFetchingSession = useSelector(sessionFetchingSelector);
 
   const history = useHistory();
 
@@ -96,10 +98,12 @@ const Register = () => {
     }
   }, [session, history]);
 
-  const dispatch = useDispatch();
+  const register = useActionCreator(SessionActionType.POST_REGISTER_REQUEST);
 
   const handleRegister = () => {
-    dispatch(registerActionCreator(username, password, email, firstName, lastName));
+    register({
+      username, password, email, firstName, lastName,
+    });
   };
 
   return (
@@ -140,7 +144,7 @@ const Register = () => {
           />
           <Button
             onClick={handleRegister}
-            loading={isFetching}
+            loading={isFetchingSession}
             style={{ marginTop: 16 }}
           >
             <span style={{ padding: 8 }}>Registrati</span>

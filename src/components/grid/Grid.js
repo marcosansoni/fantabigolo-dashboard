@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Color } from '../../assets/theme';
 
 const FullPage = styled.div`
@@ -34,6 +35,18 @@ const Grid = (props) => {
       </Container>
     </FullPage>
   );
+};
+
+Grid.propTypes = {
+  children: PropTypes.any,
+  style: PropTypes.object,
+  className: PropTypes.string,
+};
+
+Grid.defaultProps = {
+  children: undefined,
+  style: undefined,
+  className: undefined,
 };
 
 export default Grid;

@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Color } from '../../../assets/theme';
 import useClickOut from '../../../hooks/useClickOut';
 import { getUserInfo } from '../../../store/user/userSelector';
-import { logoutActionCreator } from '../../../store/session/sessionActionCreator';
 
 const ContainerPhoto = styled.div`
   border-radius: 50%;
@@ -73,7 +72,7 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(logoutActionCreator());
+    // dispatch(logoutActionCreator());
   };
 
   const [isSelected, setIsSelected] = useState(false);

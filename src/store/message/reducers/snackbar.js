@@ -1,8 +1,8 @@
-import { SNACKBAR } from '../messageActionCreator';
+import MessageActionType from '../MessageActionType';
 
 const snackbar = (state = {}, action) => {
-  if(action.type === SNACKBAR){
-    if(action?.payload){
+  if (action.type === MessageActionType.SNACKBAR) {
+    if (action?.payload) {
       return action.payload;
     }
     return state;

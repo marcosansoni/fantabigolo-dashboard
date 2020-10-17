@@ -5,6 +5,7 @@ const PathAPI = {
   USER: {
     ALL: '/user',
     FRIENDS: '/user/friend',
+    PARTICIPANTS: '/user/partecipations',
   },
   FANTALEAGUE: {
     NEW: '/fantaleague/create',

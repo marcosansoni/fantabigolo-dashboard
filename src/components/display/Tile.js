@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Color } from '../../assets/theme';
 
 const Container = styled.div`
@@ -46,6 +47,24 @@ const Tile = (props) => {
       {children}
     </Container>
   );
+};
+
+Tile.propTypes = {
+  leftBorder: PropTypes.bool,
+  bottomBorder: PropTypes.bool,
+  shadow: PropTypes.bool,
+  children: PropTypes.any,
+  style: PropTypes.object,
+  className: PropTypes.string,
+};
+
+Tile.defaultProps = {
+  leftBorder: false,
+  bottomBorder: false,
+  shadow: false,
+  children: undefined,
+  style: undefined,
+  className: undefined,
 };
 
 export default Tile;

@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { getUsername } from '../../store/session/sessionSelector';
-import { logoutActionCreator } from '../../store/session/sessionActionCreator';
+import { Button } from 'antd';
+import { useSelector } from 'react-redux';
 import ContainerPage from '../../components/layout/ContainerPage';
-import { userInfoActionCreator } from '../../store/user/userActionCreator';
-import useTheme from '../../hooks/useTheme';
-import { friendsListActionCreator } from '../../store/friends/friendsActionCreator';
 import Section from '../../components/display/Section';
 import H3 from '../../components/typography/heading/H3';
 import P from '../../components/typography/paragraph/P';
-import {Button} from 'antd';
 import Routes from '../../route/Routes';
+import useActionCreator from '../../store/utils/useActionCreator';
+import FantaleagueActionType from '../../store/fantaleague/FantaleagueActionType';
+import fantaleagueFetchingSelector
+  from '../../store/fantaleague/selectors/fantaleagueFetchingSelector';
+import byIdSelectorFactory from '../../store/common/selectors/byIdSelectorFactory';
 
 const ContainerEmpty = styled.div`
   width: 100%;
@@ -24,74 +24,31 @@ const ContainerEmpty = styled.div`
 `;
 
 const Home = () => {
-  const username = useSelector(getUsername);
-  const dispatch = useDispatch();
-
-  const { theme } = useTheme();
-
   const history = useHistory();
 
-  const handleLogout = () => {
-    dispatch(logoutActionCreator());
-  };
+  const isFetching = useSelector(fantaleagueFetchingSelector);
+  const fantaleagueById = useSelector(byIdSelectorFactory('fantaleague'));
 
-  // const renderDropdown = (option) => {
-  //   if (option === ToolbarOptions.FANTALEGHE) {
-  //     return (<FantaDropdown />);
-  //   }
-  // };
+  const getCompetitions = useActionCreator(FantaleagueActionType.GET_FANTA_LEAGUE_BY_USERNAME_REQUEST);
 
-  // const renderToolbar = () => (
-  //   <Toolbar
-  //     options={[ToolbarOptions.FANTALEGHE, ToolbarOptions.REAL_WORLD]}
-  //     renderDropdown={renderDropdown}
-  //   />
-  // );
-
-  useEffect(() => {
-    dispatch(userInfoActionCreator(username));
-    dispatch(friendsListActionCreator(username));
-  }, [username, dispatch]);
+  useEffect(() => getCompetitions(), []);
 
   return (
     <ContainerPage>
-      {/* <Center> */}
-      {/*  <> */}
-      {/*    <div style={{ padding: 8 }}> */}
-      {/*      <H1>Succesfull login as</H1> */}
-      {/*      {' '} */}
-      {/*      <H3>{username}</H3> */}
-      {/*    </div> */}
-      {/*    <Button onClick={handleLogout}> */}
-      {/*      LOGOUT */}
-      {/*    </Button> */}
-      {/*  </> */}
-      {/*  <Tile shadow leftBorder bottomBorder> */}
-      {/*    CCC */}
-      {/*  </Tile> */}
-      {/* </Center> */}
-      {/* <GridContainer colGutters={48}> */}
-      {/*  <GridRow> */}
-      {/*    <GridCol size={6}> */}
-      {/*      <Tile shadow style={{ backgroundColor: theme[Color.LIGHT_BACKGROUND], paddingTop: 24 }}> */}
-      {/*        <H2>Highlight</H2> */}
-      {/*        <GridRow style={{ paddingTop: 16 }}> */}
-      {/*          <Tile shadow bottomBorder style={{ marginRight: 48, maxWidth: 277 }}><H3>AA</H3></Tile> */}
-      {/*          <Tile shadow bottomBorder style={{ marginRight: 48, maxWidth: 277 }}>2</Tile> */}
-      {/*          <Tile shadow bottomBorder style={{ maxWidth: 277 }}>3</Tile> */}
-      {/*        </GridRow> */}
-      {/*      </Tile> */}
-      {/*    </GridCol> */}
-      {/*  </GridRow> */}
-      {/* </GridContainer> */}
-      {/* /!* <GridRow> *!/ */}
-      {/* /!*  <GridCol size={6}> *!/ */}
+      {isFetching && (
+        <H3>Fetching data ...</H3>
+      )}
+      {!isFetching && Object.values(fantaleagueById).length === 0 && (
       <Section title={(<H3>Fantaleghe</H3>)}>
         <ContainerEmpty>
           <P>Nessuna fantalega al momento</P>
           <Button onClick={() => history.push(Routes.FANTALEAGUE.NEW)}>Creane una</Button>
         </ContainerEmpty>
       </Section>
+      )}
+      {!isFetching && Object.values(fantaleagueById).length && (
+        JSON.stringify(fantaleagueById)
+      )}
     </ContainerPage>
   );
 };

@@ -3,16 +3,18 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Routes from '../../route/Routes';
-import { userInfoActionCreator } from '../../store/user/userActionCreator';
-import { friendsListActionCreator } from '../../store/friends/friendsActionCreator';
-import { getUsername } from '../../store/session/sessionSelector';
-import { getUserInfo } from '../../store/user/userSelector';
 import { Color } from '../../assets/theme';
 import useTheme from '../../hooks/useTheme';
 import Grid from '../grid/Grid';
+import useActionCreator from '../../store/utils/useActionCreator';
+import FriendActionType from '../../store/friend/FriendActionType';
+import UserActionType from '../../store/user/UserActionType';
+import userSelector from '../../store/user/selectors/userSelector';
+import sessionSelector from '../../store/session/selectors/sessionSelector';
+import SessionActionType from '../../store/session/SessionActionType';
 
 const { Header, Content } = Layout;
 const { SubMenu } = Menu;
@@ -40,13 +42,14 @@ const ContainerPage = (props) => {
     selectedItem,
   } = props;
 
-  const username = useSelector(getUsername);
-  const userInfo = useSelector(getUserInfo);
-  const dispatch = useDispatch();
+  const { username } = useSelector(sessionSelector);
+  const user = useSelector(userSelector);
 
   const { theme } = useTheme();
 
   const history = useHistory();
+
+  const postLogout = useActionCreator(SessionActionType.POST_LOGOUT_REQUEST);
 
   const handleClickMenuItem = ({ key }) => {
     switch (key) {
@@ -55,7 +58,7 @@ const ContainerPage = (props) => {
       case ToolbarItem.REAL_WORLD:
         return history.push(Routes.REAL_WORLD.HOME);
       case ToolbarItem.LOGOUT:
-        return history.push(Routes.LOGOUT);
+        return postLogout();
       case ToolbarItem.SETTINGS:
         return history.push(Routes.SETTINGS);
       default:
@@ -63,16 +66,19 @@ const ContainerPage = (props) => {
     }
   };
 
+  const getUserInfo = useActionCreator(UserActionType.GET_USER_INFO_REQUEST);
+  const getFriends = useActionCreator(FriendActionType.GET_FRIENDS_LIST_REQUEST);
+
   useEffect(() => {
-    dispatch(userInfoActionCreator(username));
-    dispatch(friendsListActionCreator(username));
-  }, [username, dispatch]);
+    getUserInfo({ username });
+    getFriends({ username });
+  }, [username]);
 
   const {
     firstName,
     lastName,
     email,
-  } = userInfo;
+  } = user;
 
   return (
     <Layout>

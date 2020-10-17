@@ -1,5 +1,8 @@
+import { select } from 'redux-saga/effects';
 import postData from '../../utils/fetchMethod/postData';
-import PathAPI, { BASE_PATH, urlFactory } from '../../../constants/PathAPI';
+import PathAPI, { urlFactory } from '../../../constants/PathAPI';
+import userSelector from '../../user/selectors/userSelector';
+import getFantaLeagueByUsernameWorker from './getFantaLeagueByUsernameWorker';
 
 function* createFantaLeagueWorker(action) {
   try {
@@ -8,7 +11,7 @@ function* createFantaLeagueWorker(action) {
       teamName,
       inviteVisibility = 0,
       competition = 1,
-      partecipants, // Number of partecipants
+      participants, // Number of partecipants
     } = action?.payload;
 
     const data = {
@@ -16,14 +19,23 @@ function* createFantaLeagueWorker(action) {
       teamName,
       inviteVisibility,
       competition,
-      partecipants,
+      partecipants: participants,
     };
 
-    console.log(urlFactory(PathAPI.FANTALEAGUE.NEW));
-    console.log(data)
+    // console.log(urlFactory(PathAPI.FANTALEAGUE.NEW));
+    // console.log(data)
 
     const response = yield postData({ url: urlFactory(PathAPI.FANTALEAGUE.NEW), data });
-    console.log(response);
+
+    const user = yield select(userSelector);
+
+    const { username } = user;
+
+    yield getFantaLeagueByUsernameWorker({ payload: username });
+
+    // if(response?.status === 200){
+    //
+    // }
   } catch (e) {
     console.log(e);
   }

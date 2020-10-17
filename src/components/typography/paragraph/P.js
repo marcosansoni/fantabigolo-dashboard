@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Color } from '../../../assets/theme';
 
 const Text = styled.h1`
-  font-size: 14px;
+  font-size: 16px;
   color: ${(p) => p.theme[p.color]}
 `;
 

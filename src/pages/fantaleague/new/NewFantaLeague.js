@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import {
-  Input, Row, Col, Select, InputNumber, Button,
-} from 'antd';
+import { Button, Col, Input, InputNumber, Row, Select, } from 'antd';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 import ContainerPage, { ToolbarItem } from '../../../components/layout/ContainerPage';
 import Field from '../../../components/input/Field';
 import Section from '../../../components/display/Section';
@@ -11,9 +8,8 @@ import H3 from '../../../components/typography/heading/H3';
 import P from '../../../components/typography/paragraph/P';
 import { Color } from '../../../assets/theme';
 import useTheme from '../../../hooks/useTheme';
-import { userInfoActionCreator } from '../../../store/user/userActionCreator';
-import createFantaLeagueCreator
-  from '../../../store/fantaleague/actionCreators/createFantaLeagueCreator';
+import useActionCreator from '../../../store/utils/useActionCreator';
+import FantaleagueActionType from '../../../store/fantaleague/FantaleagueActionType';
 
 const { Option } = Select;
 
@@ -33,21 +29,21 @@ const NewFantaLeague = () => {
   const [fantaLeague, setFantaLeague] = useState();
   const [visibility, setVisibility] = useState(0);
   const [competition, setCompetition] = useState(1);
-  const [partecipant, setPartecipant] = useState();
+  const [participants, setParticipants] = useState();
 
   const { theme } = useTheme();
 
-  const dispatch = useDispatch();
+  const createFantaLeague = useActionCreator(FantaleagueActionType.CREATE_FANTA_LEAGUE_REQUEST);
 
   const handleClickCreate = () => {
     // TODO insert validation
-    dispatch(createFantaLeagueCreator({
+    createFantaLeague({
       leagueName: fantaLeague,
       teamName: fantaTeam,
       inviteVisibility: visibility,
       competition,
-      partecipants: partecipant,
-    }));
+      participants,
+    });
   };
 
   return (
@@ -117,8 +113,8 @@ const NewFantaLeague = () => {
               >
                 <InputNumber
                   style={{ width: '100%' }}
-                  value={partecipant}
-                  onChange={(v) => setPartecipant(v)}
+                  value={participants}
+                  onChange={(v) => setParticipants(v)}
                 />
               </Field>
             </Col>
