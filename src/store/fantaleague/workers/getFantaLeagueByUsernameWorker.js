@@ -34,7 +34,7 @@ function* getFantaLeagueByUsernameWorker(action) {
     // eslint-disable-next-line no-restricted-syntax
     for (const p of participation) {
       const lowerCaseKeyP = firstLetterLowerCaseObjectKey(p);
-      const { leagueID, season } = lowerCaseKeyP;
+      const { leagueID, season, leagueName } = lowerCaseKeyP;
       const {
         admin,
         team,
@@ -44,9 +44,15 @@ function* getFantaLeagueByUsernameWorker(action) {
       byId = {
         ...byId,
         [leagueID]: {
-          ...lowerCaseKeyP,
+          leagueID,
+          leagueName,
           admin,
-          participant,
+          participant: {
+            [season]: participant,
+          },
+          team: {
+            [season]: team,
+          },
         },
       };
 
@@ -59,26 +65,6 @@ function* getFantaLeagueByUsernameWorker(action) {
         };
       }
     }
-    // participation.forEach((p) => {
-    //   const lowerCaseKeyP = firstLetterLowerCaseObjectKey(p);
-    //   const { leagueID } = lowerCaseKeyP;
-    //   byId = {
-    //     ...byId,
-    //     [leagueID]: lowerCaseKeyP,
-    //   };
-    // });
-
-    // const getData = (leagueId, season) => yield getFantaleagueMethod()
-    //
-    // console.log('aaa');
-
-    // if (Object.keys(byId).length) {
-    //   const leagueId = Object.keys(byId)[0];
-    //   const { season } = byId[leagueId];
-    //   console.log(leagueId, season);
-    //   console.log(yield getFantaleagueMethod(leagueId, season));
-    // }
-    yield getRealLeague();
 
     if (response?.status === 200 && participation) {
       return yield put(actionCreator(

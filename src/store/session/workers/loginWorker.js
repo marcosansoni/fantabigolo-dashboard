@@ -5,6 +5,10 @@ import MessageActionType from '../../message/MessageActionType';
 import postData from '../../utils/fetchMethod/postData';
 import PathAPI, { urlFactory } from '../../../constants/PathAPI';
 import SessionActionType from '../SessionActionType';
+import getRealLeague from '../../realWorld/method/getRealLeagueMethod';
+import getRealTeams from '../../realWorld/method/getRealTeamsMethod';
+import RealWorldActionType from '../../realWorld/RealWorldActionType';
+import { RealWorldStatusFetching } from '../../realWorld/reducers/statusFetching';
 
 function* loginWorker(action) {
   const {
@@ -28,7 +32,7 @@ function* loginWorker(action) {
   // if(!response){
   //   return yield put({type: LOGIN});
   // }
-  console.log(response)
+  // console.log(response)
 
   if (status === 404) {
     // yield put(snackbarActionCreator('User not found', Severity.ERROR));
@@ -40,8 +44,29 @@ function* loginWorker(action) {
   }
 
   if (status === 200) {
+    // Start fetching of real world data
+    yield put(actionCreator(
+      RealWorldActionType.REAL_WORLD_STATUS_FETCHING,
+      { statusFetching: RealWorldStatusFetching.START_FETCHING },
+    ));
+    const session = data.code;
+    const realLeagueById = yield getRealLeague({ session });
+    // Completed the league
+    yield put(actionCreator(
+      RealWorldActionType.REAL_WORLD_STATUS_FETCHING,
+      { statusFetching: RealWorldStatusFetching.COMPLETED_LEAGUE },
+    ));
+    const { teamIds } = realLeagueById;
+    const realTeamById = yield getRealTeams({ teamIds, session });
+    // Completed the teams
+    yield put(actionCreator(
+      RealWorldActionType.REAL_WORLD_STATUS_FETCHING,
+      { statusFetching: RealWorldStatusFetching.COMPLETED_TEAM },
+    ));
+    // const {}
+
     // yield put(loginSuccess(username, data.code));
-    yield put(actionCreator(SessionActionType.POST_LOGIN, { username, session: data.code }));
+    yield put(actionCreator(SessionActionType.POST_LOGIN, { username, session }));
   }
 
   return yield put({ type: SessionActionType.POST_LOGIN });

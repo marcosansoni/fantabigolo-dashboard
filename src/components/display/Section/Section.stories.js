@@ -1,22 +1,18 @@
-import Section from './Section';
 import React from 'react';
-
-// const SectionStory = () => {
-//   return(
-//     <Section
-//       title={""}
-//     />
-//   )
-// }
-//
-// export default SectionStory;
+import Section from './Section';
+import StoryArea from '../../../../.storybook/common/StoryArea';
 
 export default {
   title: 'Display/Section',
   component: Section,
-  // argTypes: {
-  //   backgroundColor: { control: 'color' },
-  // },
+  argTypes: {
+    title: 'label',
+    children: 'string',
+  },
+  args: {
+    title: 'DefaultTitle',
+    children: <StoryArea height="300px">Story</StoryArea>,
+  },
 };
 
 const Template = (args) => <Section {...args} />;

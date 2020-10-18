@@ -27,6 +27,15 @@ const PathAPI = {
     DATES: '/realLeague/dates',
     TEAMS: '/realLeague/teams',
   },
+  REAL_TEAM: {
+    LEAGUE: '/team/league',
+    COUNTRY: '/team/country',
+    FOUNDED: '/team/founded',
+    LOGO: '/team/logo',
+    CITY: '/team/city',
+    STADIUM: '/team/stadium',
+    PLAYERS: '/team/players',
+  },
 };
 
 const BASE_PATH = process.env.REACT_APP_BASE_PATH;

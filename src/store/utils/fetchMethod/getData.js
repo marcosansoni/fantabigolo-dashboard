@@ -2,7 +2,7 @@ import axios from 'axios';
 import { select } from 'redux-saga/effects';
 import sessionSelector from '../../session/selectors/sessionSelector';
 
-function* getData({ url, data }) {
+function* getData({ url, data, session: customSession = undefined }) {
   // Get the session used for api call
   const { session: sessionID } = yield select(sessionSelector);
 
@@ -10,7 +10,7 @@ function* getData({ url, data }) {
     url,
     {
       headers: {
-        sessionID,
+        sessionID: customSession || sessionID,
         ...data,
       },
     },
