@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Button } from 'antd';
 import { useSelector } from 'react-redux';
 import ContainerPage from '../../components/layout/ContainerPage';
-import Section from '../../components/display/Section';
+import Section from '../../components/display/Section/Section';
 import H3 from '../../components/typography/heading/H3';
 import P from '../../components/typography/paragraph/P';
 import Routes from '../../route/Routes';

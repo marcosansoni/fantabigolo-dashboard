@@ -11,7 +11,7 @@ function* getFriendsListWorker(action) {
   // const data =
 
   // const response = yield getFriends({ username });
-  const response = yield getData({ url: urlFactory(PathAPI.FRIENDS), data: { username } });
+  const response = yield getData({ url: urlFactory(PathAPI.FRIEND), data: { username } });
   // const response = yield getFriends({ username });
 
   const {

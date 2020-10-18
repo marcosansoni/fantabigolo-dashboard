@@ -58,7 +58,8 @@ const ContainerPage = (props) => {
       case ToolbarItem.REAL_WORLD:
         return history.push(Routes.REAL_WORLD.HOME);
       case ToolbarItem.LOGOUT:
-        return postLogout();
+        return history.push(Routes.LOGOUT);
+        // return postLogout();
       case ToolbarItem.SETTINGS:
         return history.push(Routes.SETTINGS);
       default:

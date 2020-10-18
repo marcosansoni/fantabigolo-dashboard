@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Button, Input } from 'antd';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Color } from '../../assets/theme';
 import Routes from '../../route/Routes';
 import useActionCreator from '../../store/utils/useActionCreator';
@@ -106,11 +107,13 @@ const Register = () => {
     });
   };
 
+  const { t } = useTranslation();
+
   return (
     <FullPage>
       <Border>
         <Box>
-          <Title>Fantabigolo</Title>
+          <Title>{t('common.brand')}</Title>
           <Description>Inserisci i campi sottostanti per completare la registrazione</Description>
           <StyledInput
             placeholder="Email"

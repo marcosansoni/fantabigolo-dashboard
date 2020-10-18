@@ -5,13 +5,18 @@ import SessionActionType from '../SessionActionType';
 import sessionSelector from '../selectors/sessionSelector';
 
 function* logoutWorker() {
-  const { username } = yield select(sessionSelector);
+  try {
+    const { username } = yield select(sessionSelector);
 
-  yield deleteData({ url: urlFactory(PathAPI.LOGOUT), data: { username } });
+    yield deleteData({
+      url: urlFactory(PathAPI.LOGOUT),
+      data: { username },
+    });
 
-  // yield deleteLogout({ username });
+    // yield deleteLogout({ username });
 
-  return yield put({ type: SessionActionType.POST_LOGOUT });
+    return yield put({ type: SessionActionType.POST_LOGOUT });
+  } catch (e) { console.log(e); }
 
   // console.log(response)
   //

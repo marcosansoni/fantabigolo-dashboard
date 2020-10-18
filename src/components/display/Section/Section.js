@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Color } from '../../assets/theme';
+import { Color } from '../../../assets/theme';
 
 const Title = styled.div`
   width: 100%;
@@ -12,6 +12,7 @@ const Separator = styled.div`
   background-color: ${(p) => p.theme[Color.ON_BACKGROUND]};
   width: 100%;
   padding-top: 4px;
+  border-radius: 4px;
 `;
 
 const Container = styled.div`
@@ -22,6 +23,9 @@ const Container = styled.div`
   flex-grow: 1;
 `;
 
+/**
+ * Section used with title and children
+ */
 const Section = (props) => {
   const {
     title,
@@ -35,7 +39,7 @@ const Section = (props) => {
       <Title>
         {title}
         {' '}
-        <Separator />
+        {title && (<Separator />)}
       </Title>
       {children}
     </Container>

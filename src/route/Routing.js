@@ -9,6 +9,7 @@ import Home from '../pages/home/Home';
 import Register from '../pages/register/Register';
 import RoutingFantaLeague from '../pages/fantaleague/RoutingFantaLeague';
 import sessionSelector from '../store/session/selectors/sessionSelector';
+import Logout from '../pages/logout/Logout';
 
 const Page = styled.div`
   width: 100vw;
@@ -27,6 +28,9 @@ const Routing = () => {
         {!session && (
           <Redirect to={Routes.LOGIN} />
         )}
+        <Route exact path={Routes.LOGOUT}>
+          <Logout />
+        </Route>
         <Route exact path={Routes.LOGIN}>
           <Login />
         </Route>

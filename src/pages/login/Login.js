@@ -105,7 +105,7 @@ const Login = () => {
     <FullPage>
       <Border>
         <Box>
-          <Title>Fantabigolo</Title>
+          <Title>{t('common.brand')}</Title>
           <StyledInput
             placeholder={t('login.placeholder.username')}
             value={username}

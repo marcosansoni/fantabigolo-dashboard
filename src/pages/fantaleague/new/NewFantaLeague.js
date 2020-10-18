@@ -3,7 +3,7 @@ import { Button, Col, Input, InputNumber, Row, Select, } from 'antd';
 import styled from 'styled-components';
 import ContainerPage, { ToolbarItem } from '../../../components/layout/ContainerPage';
 import Field from '../../../components/input/Field';
-import Section from '../../../components/display/Section';
+import Section from '../../../components/display/Section/Section';
 import H3 from '../../../components/typography/heading/H3';
 import P from '../../../components/typography/paragraph/P';
 import { Color } from '../../../assets/theme';
