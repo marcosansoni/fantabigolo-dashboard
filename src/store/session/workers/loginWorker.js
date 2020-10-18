@@ -63,7 +63,18 @@ function* loginWorker(action) {
       RealWorldActionType.REAL_WORLD_STATUS_FETCHING,
       { statusFetching: RealWorldStatusFetching.COMPLETED_TEAM },
     ));
-    // const {}
+
+    // Get a list with all the player Id currently into the store
+    let realPlayerIds = [];
+    Object.keys(realTeamById).forEach((teamId) => {
+      const { playerIds } = realTeamById[teamId];
+      const allSeason = Object.keys(playerIds);
+      allSeason.forEach((season) => {
+        realPlayerIds = [...realPlayerIds, ...playerIds[season]];
+      });
+    });
+
+    console.log(realPlayerIds);
 
     // yield put(loginSuccess(username, data.code));
     yield put(actionCreator(SessionActionType.POST_LOGIN, { username, session }));
