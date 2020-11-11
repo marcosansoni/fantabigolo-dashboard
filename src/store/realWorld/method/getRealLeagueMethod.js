@@ -98,24 +98,28 @@ function* getRealLeague({ leagueId = 891, session }) {
     teamsRequest,
   ]);
 
-  console.log(realLeagueResponse);
+  const nameResponse = realLeagueResponse && realLeagueResponse.length && realLeagueResponse[0];
+  const logoResponse = realLeagueResponse && realLeagueResponse.length > 0 && realLeagueResponse[1];
+  const nationResponse = realLeagueResponse && realLeagueResponse.length > 1 && realLeagueResponse[2];
+  const seasonResponse = realLeagueResponse && realLeagueResponse.length > 2 && realLeagueResponse[3];
+  const dateResponse = realLeagueResponse && realLeagueResponse.length > 3 && realLeagueResponse[4];
+  const teamsResponse = realLeagueResponse && realLeagueResponse.length > 4 && realLeagueResponse[5];
 
-  // const name = normalizedName(nameResponse);
-  // const logo = normalizedLogo(logoResponse);
-  // const nation = normalizedNation(nationResponse);
-  // const season = normalizedSeason(seasonResponse);
-  // const date = normalizedDate(dateResponse);
-  // const teamIds = normalizedTeams(teamsResponse);
-  //
-  // return {
-  //   ...(name && { name }),
-  //   ...(logo && { logo }),
-  //   ...(nation && { nation }),
-  //   ...(season && { season: Number(season) }),
-  //   ...(Object.keys(date).length && { date }),
-  //   ...(teamIds.length && { teamIds }),
-  // };
-  return {};
+  const name = nameResponse && normalizedName(nameResponse);
+  const logo = logoResponse && normalizedLogo(logoResponse);
+  const nation = nationResponse && normalizedNation(nationResponse);
+  const season = seasonRequest && normalizedSeason(seasonResponse);
+  const date = dateResponse && normalizedDate(dateResponse);
+  const teamIds = teamsResponse && normalizedTeams(teamsResponse);
+
+  return {
+    ...(name && { name }),
+    ...(logo && { logo }),
+    ...(nation && { nation }),
+    ...(season && { season: Number(season) }),
+    ...(Object.keys(date).length && { date }),
+    ...(teamIds.length && { teamIds }),
+  };
 }
 
 export default getRealLeague;

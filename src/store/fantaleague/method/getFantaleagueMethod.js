@@ -1,3 +1,4 @@
+import { all } from 'redux-saga/effects';
 import getData from '../../utils/fetchMethod/getData';
 import PathAPI, { urlFactory } from '../../../constants/PathAPI';
 
@@ -44,27 +45,51 @@ const normalizedTeam = (response) => {
 
 function* getFantaleagueMethod(leagueId, season) {
   // list of username of participants
-  const participant = yield getData({
+  const participantRequest = getData({
     url: urlFactory(PathAPI.FANTALEAGUE.PARTICIPANT),
     data: { leagueID: leagueId, season },
   });
 
   // list of all teams into league
-  const team = yield getData({
+  const teamRequest = getData({
     url: urlFactory(PathAPI.FANTALEAGUE.TEAM),
     data: { leagueID: leagueId, season },
   });
 
   // username of admin into league
-  const admin = yield getData({
+  const adminRequest = getData({
     url: urlFactory(PathAPI.FANTALEAGUE.ADMIN),
     data: { leagueID: leagueId },
   });
 
+  const statusRequest = getData({
+    url: urlFactory(PathAPI.RULES.STATE),
+    data: { leagueID: leagueId, season },
+  });
+
+  const response = yield all([
+    adminRequest,
+    participantRequest,
+    teamRequest,
+    statusRequest,
+  ]);
+
+  const adminResponse = response && response.length && response[0];
+  const participantResponse = response && response.length > 1 && response[1];
+  const teamResponse = response && response.length > 2 && response[2];
+  const statusResponse = response && response.length > 3 && response[3];
+
+  const admin = adminResponse && normalizedAdmin(adminResponse);
+  const participant = participantResponse && normalizedParticipant(participantResponse);
+  const team = teamResponse && normalizedTeam(teamResponse);
+  console.log(statusResponse)
+
   return {
-    admin: normalizedAdmin(admin),
-    participant: normalizedParticipant(participant),
-    team: normalizedTeam(team),
+    ...(admin.length && { admin }),
+    ...(participant.length && { participant }),
+    ...(Object.keys(team).length && { team }),
+    // participant: normalizedParticipant(participant),
+    // team: normalizedTeam(team),
   };
 }
 

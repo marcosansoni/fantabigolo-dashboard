@@ -1,4 +1,4 @@
-import { Color } from '../../../assets/theme';
+import { Color } from '../../../assets/OLD/theme';
 
 const Severity = {
   WARNING: 'warning',

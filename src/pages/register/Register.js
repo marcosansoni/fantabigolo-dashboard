@@ -4,7 +4,7 @@ import { Button, Input } from 'antd';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Color } from '../../assets/theme';
+import { Color } from '../../assets/OLD/theme';
 import Routes from '../../route/Routes';
 import useActionCreator from '../../store/utils/useActionCreator';
 import SessionActionType from '../../store/session/SessionActionType';

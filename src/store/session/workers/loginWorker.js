@@ -5,10 +5,6 @@ import MessageActionType from '../../message/MessageActionType';
 import postData from '../../utils/fetchMethod/postData';
 import PathAPI, { urlFactory } from '../../../constants/PathAPI';
 import SessionActionType from '../SessionActionType';
-import getRealLeague from '../../realWorld/method/getRealLeagueMethod';
-import getRealTeams from '../../realWorld/method/getRealTeamsMethod';
-import RealWorldActionType from '../../realWorld/RealWorldActionType';
-import { RealWorldStatusFetching } from '../../realWorld/reducers/statusFetching';
 
 function* loginWorker(action) {
   const {
@@ -44,37 +40,39 @@ function* loginWorker(action) {
   }
 
   if (status === 200) {
-    // Start fetching of real world data
-    yield put(actionCreator(
-      RealWorldActionType.REAL_WORLD_STATUS_FETCHING,
-      { statusFetching: RealWorldStatusFetching.START_FETCHING },
-    ));
+    // // Start fetching of real world data
+    // yield put(actionCreator(
+    //   RealWorldActionType.REAL_WORLD_STATUS_FETCHING,
+    //   { statusFetching: RealWorldStatusFetching.START_FETCHING },
+    // ));
     const session = data.code;
-    const realLeagueById = yield getRealLeague({ session });
-    // Completed the league
-    yield put(actionCreator(
-      RealWorldActionType.REAL_WORLD_STATUS_FETCHING,
-      { statusFetching: RealWorldStatusFetching.COMPLETED_LEAGUE },
-    ));
-    const { teamIds } = realLeagueById;
-    const realTeamById = yield getRealTeams({ teamIds, session });
-    // Completed the teams
-    yield put(actionCreator(
-      RealWorldActionType.REAL_WORLD_STATUS_FETCHING,
-      { statusFetching: RealWorldStatusFetching.COMPLETED_TEAM },
-    ));
-
-    // Get a list with all the player Id currently into the store
-    let realPlayerIds = [];
-    Object.keys(realTeamById).forEach((teamId) => {
-      const { playerIds } = realTeamById[teamId];
-      const allSeason = Object.keys(playerIds);
-      allSeason.forEach((season) => {
-        realPlayerIds = [...realPlayerIds, ...playerIds[season]];
-      });
-    });
-
-    console.log(realPlayerIds);
+    // const realLeagueById = yield getRealLeague({ session });
+    // // Completed the league
+    // yield put(actionCreator(
+    //   RealWorldActionType.REAL_WORLD_STATUS_FETCHING,
+    //   { statusFetching: RealWorldStatusFetching.COMPLETED_LEAGUE },
+    // ));
+    // const { teamIds } = realLeagueById;
+    // const realTeamById = yield getRealTeams({ teamIds, session });
+    //
+    // // Completed the teams
+    // yield put(actionCreator(
+    //   RealWorldActionType.REAL_WORLD_STATUS_FETCHING,
+    //   { statusFetching: RealWorldStatusFetching.COMPLETED_TEAM },
+    // ));
+    //
+    // // Get a list with all the player Id currently into the store
+    // let realPlayerIds = [];
+    // Object.keys(realTeamById).forEach((teamId) => {
+    //   const { playerIds } = realTeamById[teamId];
+    //   const allSeason = Object.keys(playerIds);
+    //   allSeason.forEach((season) => {
+    //     realPlayerIds = [...realPlayerIds, ...playerIds[season]];
+    //   });
+    // });
+    //
+    // const uniquePlayerIds = [...new Set(realPlayerIds)];
+    // const realPlayerById = yield getRealPlayers({ playerIds: uniquePlayerIds, session });
 
     // yield put(loginSuccess(username, data.code));
     yield put(actionCreator(SessionActionType.POST_LOGIN, { username, session }));

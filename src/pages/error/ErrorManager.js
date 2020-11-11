@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { Color } from '../../assets/theme';
+import { useSelector } from 'react-redux';
+import { Color } from '../../assets/OLD/theme';
 import useActionCreator from '../../store/utils/useActionCreator';
 import MessageActionType from '../../store/message/MessageActionType';
 import snackbarSelector from '../../store/message/selectors/snackbarSelector';

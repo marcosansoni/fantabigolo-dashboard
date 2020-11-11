@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Color } from '../../assets/theme';
+import { Color } from '../../assets/OLD/theme';
 
 const FullPage = styled.div`
   width: 100%;

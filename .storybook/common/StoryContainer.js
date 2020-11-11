@@ -6,12 +6,12 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(45deg, #e9e9e9 25%, #e6e3e3 25%, #e6e3e3 50%, #e9e9e9 50%, #e9e9e9 75%, #e6e3e3 75%, #e6e3e3 100%);
+  padding: 24px;
   width: ${p => p.width || '100%'};
   height: ${p => p.height || '100%'};
 `
-/** Default Styled used as background into storybook*/
-const StoryArea = (props) => {
+/** Default Styled used as container of a story into storybook*/
+const StoryContainer = (props) => {
   const{
     style,
     className,
@@ -32,7 +32,7 @@ const StoryArea = (props) => {
   );
 }
 
-StoryArea.propTypes = {
+StoryContainer.propTypes = {
   children: PropTypes.any,
   width: PropTypes.string,
   height: PropTypes.string,
@@ -40,7 +40,7 @@ StoryArea.propTypes = {
   className: PropTypes.string,
 };
 
-StoryArea.defaultProps = {
+StoryContainer.defaultProps = {
   children: undefined,
   width: undefined,
   height: undefined,
@@ -48,4 +48,4 @@ StoryArea.defaultProps = {
   className: undefined,
 };
 
-export default StoryArea;
+export default StoryContainer;

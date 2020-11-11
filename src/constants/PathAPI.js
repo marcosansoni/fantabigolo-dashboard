@@ -19,6 +19,9 @@ const PathAPI = {
     BALANCE: '/fantateam/balance',
     PLAYER: '/fantateam/players',
   },
+  RULES: {
+    STATE: '/rules/general/state',
+  },
   REAL_LEAGUE: {
     NAME: '/realLeague/name',
     NATION: '/realLeague/nation',
@@ -35,6 +38,16 @@ const PathAPI = {
     CITY: '/team/city',
     STADIUM: '/team/stadium',
     PLAYERS: '/team/players',
+  },
+  REAL_PLAYER: {
+    NAME: '/realPlayer/name',
+    BIRTH: '/realPlayer/birth',
+    BIRTHPLACE: '/realPlayer/birthPlace',
+    NATION: '/realPlayer/nation',
+    TEAM: '/realPlayer/team',
+    ROLE: '/realPlayer/role',
+    HEIGHT: '/realPlayer/height',
+    WEIGHT: '/realPlayer/weight',
   },
 };
 

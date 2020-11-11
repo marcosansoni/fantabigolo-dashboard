@@ -8,8 +8,8 @@ const RoutingFantaLeague = () => (
     <Route exact path={Routes.FANTALEAGUE.NEW}>
       <NewFantaLeague />
     </Route>
-    <Route exact path={Routes.FANTALEAGUE.HOME}>
-      <div>Home Fanta League</div>
+    <Route exact path={Routes.FANTALEAGUE.HOME_LEAGUE}>
+      <div>Dettaglio lega</div>
     </Route>
   </>
 );

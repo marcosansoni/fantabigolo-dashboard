@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Col, Input, InputNumber, Row, Select, } from 'antd';
+import {
+  Button, Col, Input, InputNumber, Row, Select,
+} from 'antd';
 import styled from 'styled-components';
-import ContainerPage, { ToolbarItem } from '../../../components/layout/ContainerPage';
 import Field from '../../../components/input/Field';
-import Section from '../../../components/display/Section/Section';
-import H3 from '../../../components/typography/heading/H3';
-import P from '../../../components/typography/paragraph/P';
-import { Color } from '../../../assets/theme';
+import { Color } from '../../../assets/OLD/theme';
 import useTheme from '../../../hooks/useTheme';
 import useActionCreator from '../../../store/utils/useActionCreator';
 import FantaleagueActionType from '../../../store/fantaleague/FantaleagueActionType';
@@ -16,6 +14,10 @@ const { Option } = Select;
 const Container = styled.div`
   padding: 48px 0;
 `;
+
+const Section = styled.span``;
+const H3 = styled.span``;
+const P = styled.span``;
 
 const ContainerButton = styled.div`
   display: flex;
@@ -47,7 +49,7 @@ const NewFantaLeague = () => {
   };
 
   return (
-    <ContainerPage selectedItem={ToolbarItem.FANTALEAGUE}>
+    <div>
       <Section title={(<H3>Crea una nuova fantalega</H3>)}>
         <Container>
           <P>
@@ -122,7 +124,10 @@ const NewFantaLeague = () => {
           <Row>
             <ContainerButton>
               <Button
-                style={{ backgroundColor: theme[Color.PRIMARY], color: theme[Color.BACKGROUND] }}
+                style={{
+                  backgroundColor: theme[Color.PRIMARY],
+                  color: theme[Color.BACKGROUND],
+                }}
                 onClick={handleClickCreate}
               >
                 Crea
@@ -132,7 +137,7 @@ const NewFantaLeague = () => {
         </Container>
 
       </Section>
-    </ContainerPage>
+    </div>
   );
 };
 

@@ -1,3 +1,4 @@
+import { all, call } from 'redux-saga/effects';
 import getData from '../../utils/fetchMethod/getData';
 import PathAPI, { urlFactory } from '../../../constants/PathAPI';
 import { firstLetterLowerCaseObjectKey } from '../../../utils/firstLetterLowerCase';
@@ -54,55 +55,73 @@ const normalizedPlayers = (response) => {
 };
 
 function* getRealTeam(teamId, season, session) {
-  const leagueResponse = yield getData({
+  const leagueRequest = getData({
     url: urlFactory(PathAPI.REAL_TEAM.LEAGUE),
     data: { teamID: teamId, season },
     session,
   });
 
-  const nationResponse = yield getData({
+  const nationRequest = getData({
     url: urlFactory(PathAPI.REAL_TEAM.COUNTRY),
     data: { teamID: teamId },
     session,
   });
 
-  const foundedResponse = yield getData({
+  const foundedRequest = getData({
     url: urlFactory(PathAPI.REAL_TEAM.FOUNDED),
     data: { teamID: teamId },
     session,
   });
 
-  const logoResponse = yield getData({
+  const logoRequest = getData({
     url: urlFactory(PathAPI.REAL_TEAM.LOGO),
     data: { teamID: teamId },
     session,
   });
 
-  const cityResponse = yield getData({
+  const cityRequest = getData({
     url: urlFactory(PathAPI.REAL_TEAM.CITY),
     data: { teamID: teamId },
     session,
   });
 
-  const stadiumResponse = yield getData({
+  const stadiumRequest = getData({
     url: urlFactory(PathAPI.REAL_TEAM.STADIUM),
     data: { teamID: teamId },
     session,
   });
 
-  const playersResponse = yield getData({
+  const playersRequest = yield getData({
     url: urlFactory(PathAPI.REAL_TEAM.PLAYERS),
     data: { team: teamId, season },
     session,
   });
 
-  const founded = normalizedFounded(foundedResponse);
-  const logo = normalizedLogo(logoResponse);
-  const nation = normalizedNation(nationResponse);
-  const league = normalizedLeague(leagueResponse);
-  const city = normalizedCity(cityResponse);
-  const stadium = normalizedStadium(stadiumResponse);
-  const playerIds = normalizedPlayers(playersResponse);
+  const realTeamRequest = yield all([
+    foundedRequest,
+    logoRequest,
+    nationRequest,
+    leagueRequest,
+    cityRequest,
+    stadiumRequest,
+    playersRequest,
+  ]);
+
+  const foundedResponse = realTeamRequest && realTeamRequest.length && realTeamRequest[0];
+  const logoResponse = realTeamRequest && realTeamRequest.length > 0 && realTeamRequest[1];
+  const nationResponse = realTeamRequest && realTeamRequest.length > 1 && realTeamRequest[2];
+  const leagueResponse = realTeamRequest && realTeamRequest.length > 2 && realTeamRequest[3];
+  const cityResponse = realTeamRequest && realTeamRequest.length > 3 && realTeamRequest[4];
+  const stadiumResponse = realTeamRequest && realTeamRequest.length > 4 && realTeamRequest[5];
+  const playersResponse = realTeamRequest && realTeamRequest.length > 5 && realTeamRequest[6];
+
+  const founded = foundedResponse && normalizedFounded(foundedResponse);
+  const logo = logoResponse && normalizedLogo(logoResponse);
+  const nation = nationResponse && normalizedNation(nationResponse);
+  const league = leagueResponse && normalizedLeague(leagueResponse);
+  const city = cityResponse && normalizedCity(cityResponse);
+  const stadium = stadiumResponse && normalizedStadium(stadiumResponse);
+  const playerIds = playersResponse && normalizedPlayers(playersResponse);
 
   return {
     ...(league && { league: { [season]: league } }),
@@ -118,13 +137,20 @@ function* getRealTeam(teamId, season, session) {
 // 891 is Serie A into this current season = 2019
 function* getRealTeams({ teamIds = [], season = 2019, session }) {
   let teamById = {};
-  for (const teamId of teamIds) {
-    const normalizedTeam = yield getRealTeam(teamId, season, session);
+
+  const teamResponse = yield all(teamIds.map((t) => call(
+    getRealTeam,
+    t,
+    season,
+    session,
+  )));
+
+  teamResponse.forEach((res, index) => {
     teamById = {
       ...teamById,
-      [teamId]: normalizedTeam,
+      [teamIds[index]]: res,
     };
-  }
+  });
 
   return teamById;
 }

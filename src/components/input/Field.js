@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import H6 from '../typography/heading/H6';
-import P from '../typography/paragraph/P';
-import MicroCopy from '../typography/paragraph/MicroCopy';
 
 const Container = styled.div`
   display: flex;
@@ -25,13 +22,15 @@ const Field = (props) => {
     className,
   } = props;
 
+  console.log(status);
+
   return (
     <Container style={style} className={className}>
-      <H6>{title}</H6>
+      <div>{title}</div>
       <ContainerChildren>
         {children}
       </ContainerChildren>
-      <MicroCopy>{description}</MicroCopy>
+      <div>{description}</div>
     </Container>
   );
 };
