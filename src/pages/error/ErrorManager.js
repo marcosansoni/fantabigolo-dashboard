@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { Color } from '../../assets/OLD/theme';
 import useActionCreator from '../../store/utils/useActionCreator';
 import MessageActionType from '../../store/message/MessageActionType';
 import snackbarSelector from '../../store/message/selectors/snackbarSelector';
+import Color from '../../assets/Color';
 
 const Snackbar = styled.div`
   position: absolute;
@@ -12,7 +12,7 @@ const Snackbar = styled.div`
   bottom: 24px;
   display: flex;
   align-items: center;
-  background-color: ${(p) => p.theme[Color.ON_BACKGROUND]};
+  background-color: ${(p) => p.theme[Color.DARK_TEXT]};
   border-radius: 4px;
   min-width: 192px;
   min-height: 48px;

@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
-import theme from '../assets/OLD/theme';
 import themeSelector from '../store/ui/selectors/themeSelector';
+import Theme from '../assets/Theme';
 
 const useTheme = () => {
-  const selectedTheme = useSelector(themeSelector);
+  const selectedThemeMode = useSelector(themeSelector);
 
   return {
-    theme: theme[selectedTheme],
+    theme: Theme[selectedThemeMode],
   };
 };
 

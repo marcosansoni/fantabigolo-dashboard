@@ -4,8 +4,6 @@ import {
 } from 'antd';
 import styled from 'styled-components';
 import Field from '../../../components/input/Field';
-import { Color } from '../../../assets/OLD/theme';
-import useTheme from '../../../hooks/useTheme';
 import useActionCreator from '../../../store/utils/useActionCreator';
 import FantaleagueActionType from '../../../store/fantaleague/FantaleagueActionType';
 
@@ -32,8 +30,6 @@ const NewFantaLeague = () => {
   const [visibility, setVisibility] = useState(0);
   const [competition, setCompetition] = useState(1);
   const [participants, setParticipants] = useState();
-
-  const { theme } = useTheme();
 
   const createFantaLeague = useActionCreator(FantaleagueActionType.CREATE_FANTA_LEAGUE_REQUEST);
 
@@ -125,8 +121,8 @@ const NewFantaLeague = () => {
             <ContainerButton>
               <Button
                 style={{
-                  backgroundColor: theme[Color.PRIMARY],
-                  color: theme[Color.BACKGROUND],
+                  // backgroundColor: theme[Color.PRIMARY],
+                  // color: theme[Color.BACKGROUND],
                 }}
                 onClick={handleClickCreate}
               >

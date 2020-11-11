@@ -1,4 +1,4 @@
 export default {
-  brand: 'Fantabigolo',
+  brand: 'FANTABIGOLO',
   add: 'Crea',
 };
