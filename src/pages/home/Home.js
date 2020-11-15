@@ -6,10 +6,11 @@ import fantaleagueFetchingSelector
   from '../../store/fantaleague/selectors/fantaleagueFetchingSelector';
 
 const Home = () => {
-
   const isFetching = useSelector(fantaleagueFetchingSelector);
 
-  const getCompetitions = useActionCreator(FantaleagueActionType.GET_FANTA_LEAGUE_BY_USERNAME_REQUEST);
+  const getCompetitions = useActionCreator(
+    FantaleagueActionType.GET_FANTA_LEAGUE_BY_USERNAME_REQUEST,
+  );
 
   useEffect(() => getCompetitions(), []);
 

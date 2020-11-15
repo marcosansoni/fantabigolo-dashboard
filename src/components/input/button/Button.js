@@ -38,7 +38,7 @@ const Container = styled.button`
   background-color: ${(p) => (p.type === ButtonType.PRIMARY ? p.theme[Color.PRIMARY_DARK] : p.theme[Color.SUBTITLE])};
   padding: 8px 16px;
   border-radius: 4px;
-  font-size: ${p => p.size === ButtonSize.SMALL ? '12px' : '14px'};
+  font-size: ${(p) => (p.size === ButtonSize.SMALL ? '12px' : '14px')};
   height: ${(p) => getHeightFromSize(p.size)};
   color: ${(p) => (p.type === ButtonType.PRIMARY ? p.theme[Color.BACKGROUND] : p.theme[Color.DARK_TEXT])};
   position: relative;

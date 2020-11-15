@@ -1,6 +1,5 @@
 import React from 'react';
 import Label from './Label';
-import StoryArea from '../../../../.storybook/common/StoryArea';
 
 export default {
   title: 'Display/Label',
