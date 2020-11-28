@@ -1,6 +1,4 @@
 import { select } from 'redux-saga/effects';
-import postData from '../../utils/fetchMethod/postData';
-import PathAPI, { urlFactory } from '../../../constants/PathAPI';
 import userSelector from '../../user/selectors/userSelector';
 import getFantaLeagueByUsernameWorker from './getFantaLeagueByUsernameWorker';
 
@@ -22,10 +20,12 @@ function* createFantaLeagueWorker(action) {
       partecipants: participants,
     };
 
+    console.log(data);
+
     // console.log(urlFactory(PathAPI.FANTALEAGUE.NEW));
     // console.log(data)
 
-    const response = yield postData({ url: urlFactory(PathAPI.FANTALEAGUE.NEW), data });
+    // const response = yield postData({ url: urlFactory(PathAPI.FANTALEAGUE.NEW), data });
 
     const user = yield select(userSelector);
 

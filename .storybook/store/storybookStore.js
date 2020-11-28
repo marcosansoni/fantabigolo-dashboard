@@ -1,25 +1,20 @@
-import {
-  createStore,
-  applyMiddleware,
-  compose,
-} from 'redux';
-
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from './rootSaga';
-import rootReducer from './rootReducer';
+import { applyMiddleware, compose, createStore } from 'redux';
+import rootReducer from '../../src/store/config/rootReducer';
+import rootSaga from '../../src/store/config/rootSaga';
 
-const saveState = (state) => {
+const saveStorybookState = (state) => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem('state', serializedState);
+    localStorage.setItem('storybookState', serializedState);
   } catch {
     // ignore write errors
   }
 };
 
-const loadState = () => {
+const loadStorybookState = () => {
   try {
-    const serializedState = localStorage.getItem('state');
+    const serializedState = localStorage.getItem('storybookState');
     if (serializedState === null) {
       return undefined;
     }
@@ -29,7 +24,7 @@ const loadState = () => {
   }
 };
 
-const configureStore = () => {
+const storybookConfigureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
 
   const composedMiddleware = process.env.NODE_ENV === 'production'
@@ -40,7 +35,7 @@ const configureStore = () => {
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     );
 
-  const persistentState = loadState();
+  const persistentState = loadStorybookState();
 
   const store = createStore(
     rootReducer,
@@ -49,7 +44,7 @@ const configureStore = () => {
   );
 
   store.subscribe(()=>{
-    saveState(store.getState());
+    saveStorybookState(store.getState());
   });
 
   sagaMiddleware.run(rootSaga);
@@ -57,4 +52,4 @@ const configureStore = () => {
   return store;
 };
 
-export default configureStore;
+export default storybookConfigureStore

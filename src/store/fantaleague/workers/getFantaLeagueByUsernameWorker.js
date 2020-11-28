@@ -1,4 +1,4 @@
-import { select, put } from 'redux-saga/effects';
+import { put, select } from 'redux-saga/effects';
 import PathAPI, { urlFactory } from '../../../constants/PathAPI';
 import getData from '../../utils/fetchMethod/getData';
 import sessionSelector from '../../session/selectors/sessionSelector';
@@ -7,8 +7,8 @@ import FantaleagueActionType from '../FantaleagueActionType';
 import getFantaleagueMethod from '../method/getFantaleagueMethod';
 import { firstLetterLowerCaseObjectKey } from '../../../utils/firstLetterLowerCase';
 import getFantateamMethod from '../../fantateam/method/getFantateamMethod';
-import getRealLeague from '../../realWorld/method/getRealLeagueMethod';
 
+// eslint-disable-next-line consistent-return
 function* getFantaLeagueByUsernameWorker(action) {
   try {
     const { username: defaultUsername } = yield select(sessionSelector);

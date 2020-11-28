@@ -22,6 +22,8 @@
         "object-curly-newline": "off",
         "react/jsx-one-expression-per-line-curly-newline": "off",
         "react/no-unescaped-entities": "off",
-        "react/jsx-one-expression-per-line": "off"
+        "react/jsx-one-expression-per-line": "off",
+        "camelcase": "off",
+        "max-len": "off"
     }
 }

@@ -19,7 +19,7 @@ function* getFriendsListWorker(action) {
     status,
   } = response || {};
 
-  console.log(data)
+  console.log(data);
 
   if (status === 404) {
     // yield put(snackbarActionCreator('User not found', Severity.ERROR));

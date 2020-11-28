@@ -4,6 +4,7 @@ import deleteData from '../../utils/fetchMethod/deleteData';
 import SessionActionType from '../SessionActionType';
 import sessionSelector from '../selectors/sessionSelector';
 
+// eslint-disable-next-line consistent-return
 function* logoutWorker() {
   try {
     const { username } = yield select(sessionSelector);
