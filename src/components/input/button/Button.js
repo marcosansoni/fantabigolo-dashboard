@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import React from 'react';
 import Color from '../../../assets/Color';
-import Shadow from '../../../assets/Shadow';
+import Shadow from '../../../assets/BoxShadow';
 
 export const ButtonType = {
   PRIMARY: 'primary',

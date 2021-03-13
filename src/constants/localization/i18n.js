@@ -1,12 +1,14 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import it from './it/index';
 
-import locale from './constants/localization/index';
 // import configureStore from './store/config/configureStore';
 
 // const store = configureStore();
 const lng = navigator.language.substring(0, 2) || navigator.userLanguage.substring(0, 2);
 const selectedLang = 'it';
+
+console.log(selectedLang);
 
 i18n
   .use(initReactI18next)
@@ -16,7 +18,7 @@ i18n
     },
     debug: false,
     resources: {
-      ...locale,
+      it,
     },
     lng: selectedLang || lng,
     fallbackLng: 'en',

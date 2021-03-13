@@ -6,8 +6,8 @@ import fantaleague from './sections/fantaleague';
 export default {
   translation: {
     login,
-    register,
     common,
+    register,
     fantaleague,
   },
 };

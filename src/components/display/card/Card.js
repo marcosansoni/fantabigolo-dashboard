@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Color from '../../../assets/Color';
-import Shadow from '../../../assets/Shadow';
+import Shadow from '../../../assets/BoxShadow';
 
 const Container = styled.div`
   border-radius: 4px;

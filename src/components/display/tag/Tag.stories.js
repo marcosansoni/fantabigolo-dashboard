@@ -9,7 +9,7 @@ export default {
     children: 'string',
   },
   args: {
-    borderColor: Color.PRIMARY_DARK
+    borderColor: Color.PRIMARY_DARK,
     // title: 'Title',
     // subtitle: 'Subtitle',
   },

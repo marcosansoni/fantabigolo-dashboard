@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Button, Input } from 'antd';
+// import { Button, Input } from 'antd';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -117,13 +117,13 @@ const Login = () => {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button
-            onClick={handleLogin}
-            loading={isFetchingSession}
-            style={{ marginTop: 16 }}
-          >
-            <span>Login</span>
-          </Button>
+          {/* <Button */}
+          {/*  onClick={handleLogin} */}
+          {/*  loading={isFetchingSession} */}
+          {/*  style={{ marginTop: 16 }} */}
+          {/* > */}
+          {/*  <span>Login</span> */}
+          {/* </Button> */}
           <RegisterText>
             {t('login.notYetUser')}
             <Link onClick={() => history.push(Routes.REGISTER)}>{t('login.register')}</Link>

@@ -1,6 +1,7 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Button, Input } from 'antd';
+// import { Button, Input } from 'antd';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -43,11 +44,11 @@ const Box = styled.div`
   font-size: 16px;
 `;
 
-const StyledInput = styled(Input)`
-  height: 40px;
-  padding: 8px;
-  margin: 8px 0;
-`;
+// const StyledInput = styled(Input)`
+//   height: 40px;
+//   padding: 8px;
+//   margin: 8px 0;
+// `;
 
 const Title = styled.div`
   width: 100%;
@@ -115,43 +116,43 @@ const Register = () => {
         <Box>
           <Title>{t('common.brand')}</Title>
           <Description>Inserisci i campi sottostanti per completare la registrazione</Description>
-          <StyledInput
-            placeholder="Email"
-            value={email}
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <StyledInput
-            placeholder="Nome utente"
-            value={username}
-            type="text"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <StyledInput
-            placeholder="Password"
-            value={password}
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <StyledInput
-            placeholder="Nome"
-            value={firstName}
-            type="text"
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <StyledInput
-            placeholder="Cognome"
-            value={lastName}
-            type="text"
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          <Button
-            onClick={handleRegister}
-            loading={isFetchingSession}
-            style={{ marginTop: 16 }}
-          >
-            <span style={{ padding: 8 }}>Registrati</span>
-          </Button>
+          {/* <StyledInput */}
+          {/*  placeholder="Email" */}
+          {/*  value={email} */}
+          {/*  type="email" */}
+          {/*  onChange={(e) => setEmail(e.target.value)} */}
+          {/* /> */}
+          {/* <StyledInput */}
+          {/*  placeholder="Nome utente" */}
+          {/*  value={username} */}
+          {/*  type="text" */}
+          {/*  onChange={(e) => setUsername(e.target.value)} */}
+          {/* /> */}
+          {/* <StyledInput */}
+          {/*  placeholder="Password" */}
+          {/*  value={password} */}
+          {/*  type="password" */}
+          {/*  onChange={(e) => setPassword(e.target.value)} */}
+          {/* /> */}
+          {/* <StyledInput */}
+          {/*  placeholder="Nome" */}
+          {/*  value={firstName} */}
+          {/*  type="text" */}
+          {/*  onChange={(e) => setFirstName(e.target.value)} */}
+          {/* /> */}
+          {/* <StyledInput */}
+          {/*  placeholder="Cognome" */}
+          {/*  value={lastName} */}
+          {/*  type="text" */}
+          {/*  onChange={(e) => setLastName(e.target.value)} */}
+          {/* /> */}
+          {/* <Button */}
+          {/*  onClick={handleRegister} */}
+          {/*  loading={isFetchingSession} */}
+          {/*  style={{ marginTop: 16 }} */}
+          {/* > */}
+          {/*  <span style={{ padding: 8 }}>Registrati</span> */}
+          {/* </Button> */}
           <RegisterText>
             Sei già registrato?
             <Link onClick={() => history.push(Routes.LOGIN)}>Vai al login</Link>
