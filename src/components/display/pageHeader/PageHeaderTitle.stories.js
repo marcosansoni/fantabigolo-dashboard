@@ -3,7 +3,7 @@ import PageHeaderTitle from './PageHeaderTitle';
 import StoryArea from '../../../../.storybook/common/StoryArea';
 
 export default {
-  title: 'components/display/pageHeader',
+  title: 'components/display/pageHeader/pageHeaderTitle',
   component: PageHeaderTitle,
   args: {
     children: <StoryArea height="48px">Children</StoryArea>,

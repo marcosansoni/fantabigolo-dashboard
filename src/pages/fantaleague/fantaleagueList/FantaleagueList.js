@@ -11,11 +11,7 @@ const FantaleagueList = () => {
   return (
     <PageHeaderTitle
       title={t('fantaleague.list.title')}
-      rightContent={(
-        <Button variant="contained" color="primary">
-          {t('fantaleague.list.add')}
-        </Button>
- )}
+      rightContent={(<Button variant="contained" color="primary">{t('fantaleague.list.add')}</Button>)}
     >
       <Tabs>
         <Tab label={t('fantaleague.list.tabs.recent')} />
