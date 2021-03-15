@@ -1,8 +1,9 @@
-import { Tab as MaterialTab, Tabs as MaterialTabs } from '@material-ui/core';
+import { Tabs as MaterialTabs } from '@material-ui/core';
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Tabs = (props) => {
-  const {children} = props;
+  const { children, style, className } = props;
   const [value, setValue] = useState(0);
 
   const handleChange = (e, updatedValue) => {
@@ -15,12 +16,24 @@ const Tabs = (props) => {
       onChange={handleChange}
       indicatorColor="primary"
       textColor="primary"
+      style={style}
+      className={className}
     >
-      <MaterialTab label="Item One" />
-      <MaterialTab label="Item Two" />
-      <MaterialTab label="Item Three" />
+      {children}
     </MaterialTabs>
   );
+};
+
+Tabs.propTypes = {
+  children: PropTypes.any,
+  style: PropTypes.object,
+  className: PropTypes.string,
+};
+
+Tabs.defaultProps = {
+  children: undefined,
+  style: undefined,
+  className: undefined,
 };
 
 export default Tabs;

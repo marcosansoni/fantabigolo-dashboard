@@ -1,16 +1,13 @@
 import React from 'react';
-import StoryArea from '../../../../.storybook/common/StoryArea';
 import Tabs from './Tabs';
+import Tab from './Tab';
 
 export default {
   title: 'components/display/tab',
   component: Tabs,
-  args: {
-    children: <StoryArea height="100%" width="100%">Children</StoryArea>,
-  },
 };
 
-const Template = (args) => <Tabs {...args} />;
+const Template = (args) => <Tabs {...args}><Tab label="Label 1" /><Tab label="Label 2" /><Tab label="Label 3" /></Tabs>;
 
 export const Default = Template.bind({});
 Default.storyName = 'Tabs';
