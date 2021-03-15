@@ -6,6 +6,7 @@ import Routes from './Routes';
 import ErrorManager from '../pages/error/ErrorManager';
 import sessionSelector from '../store/session/selectors/sessionSelector';
 import AuthenticationRouter from '../pages/authentication/AuthenticationRouter';
+import FantaleagueRouter from '../pages/fantaleague/FantaleagueRouter';
 
 const Page = styled.div`
   width: 100vw;
@@ -34,6 +35,7 @@ const Routing = () => {
         {/*  <Register /> */}
         {/* </Route> */}
         <AuthenticationRouter />
+        <FantaleagueRouter />
         {/* <Route exact path={Routes.HOME}> */}
         {/*  <Home /> */}
         {/* </Route> */}

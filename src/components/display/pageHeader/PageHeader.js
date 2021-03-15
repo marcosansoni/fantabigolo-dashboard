@@ -6,7 +6,7 @@ import Color from '../../../assets/Color';
 
 const Container = styled.div`
   width: 100%;
-  padding: 36px;
+  padding: 36px 36px 0 36px;
   background-color: ${(p) => p.theme[Color.BACKGROUND]};
   box-shadow: ${BoxShadow.DARK};
   display: flex;

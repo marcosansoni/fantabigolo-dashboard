@@ -1,5 +1,9 @@
 export default {
-  myFantaleague: 'Le tue fantaleghe',
-  youAreAdmin: 'Sei un admin',
-  participant: 'Partecipanti',
+  list: {
+    title: 'Le tue fantaleghe',
+    tabs: {
+      recent: 'Recenti',
+    },
+    add: 'Aggiungi',
+  },
 };

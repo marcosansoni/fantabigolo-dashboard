@@ -7,6 +7,7 @@ const Routes = {
   HOME: '/',
   SETTINGS: '/settings',
   FANTALEAGUE: {
+    LIST: '/fantaleague/list',
     HOME: '/fantaleague',
     NEW: '/fantaleague/new',
     HOME_LEAGUE: '/fantaleague/:leagueId',
