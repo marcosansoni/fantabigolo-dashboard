@@ -6,8 +6,8 @@ const Theme = {
   [ThemeMode.LIGHT]: {
     [Color.BACKGROUND]: Palette.WHITE,
     [Color.TEXT_DARK]: Palette.BLACK,
-    [Color.TEXT_LIGHT]: Palette.GRAY_LIGHT,
-    [Color.SUBTITLE]: Palette.GRAY,
+    [Color.TEXT_LIGHT]: Palette.GRAY,
+    [Color.SUBTITLE]: Palette.GRAY_LIGHT,
     [Color.BORDER]: Palette.GRAY_SUPER_LIGHT,
     [Color.PRIMARY_DARK]: Palette.BLUE_DARK,
     [Color.PRIMARY_LIGHT]: Palette.BLUE_LIGHT,
@@ -17,8 +17,8 @@ const Theme = {
   [ThemeMode.DARK]: {
     [Color.BACKGROUND]: Palette.WHITE,
     [Color.TEXT_DARK]: Palette.BLACK,
-    [Color.TEXT_LIGHT]: Palette.GRAY_LIGHT,
-    [Color.SUBTITLE]: Palette.GRAY,
+    [Color.TEXT_LIGHT]: Palette.GRAY,
+    [Color.SUBTITLE]: Palette.GRAY_LIGHT,
     [Color.BORDER]: Palette.GRAY_SUPER_LIGHT,
     [Color.PRIMARY_DARK]: Palette.BLUE_DARK,
     [Color.PRIMARY_LIGHT]: Palette.BLUE_LIGHT,

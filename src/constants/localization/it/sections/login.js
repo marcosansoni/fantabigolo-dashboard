@@ -15,5 +15,4 @@ export default {
   },
   primary: 'Login',
   notYetUser: 'Non sei ancora utente? Registrati',
-
 };

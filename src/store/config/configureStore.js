@@ -48,7 +48,7 @@ const configureStore = () => {
     composedMiddleware,
   );
 
-  store.subscribe(()=>{
+  store.subscribe(() => {
     saveState(store.getState());
   });
 

@@ -1,7 +1,7 @@
 const Palette = {
   BLACK: '#000000',
   GRAY_DARK: '#8D9091',
-  GRAY: '#CCCCCC',
+  GRAY: '#9A9A9A',
   GRAY_LIGHT: '#D0D0D0',
   GRAY_SUPER_LIGHT: '#FBFBFB',
   BLUE_DARK: '#443DF6',

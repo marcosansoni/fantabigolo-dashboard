@@ -9,12 +9,10 @@ import BoxShadow from '../../../assets/BoxShadow';
 import Color from '../../../assets/Color';
 import Font from '../../../assets/Font';
 import Routes from '../../../route/Routes';
-import useActionCreator from '../../../store/utils/useActionCreator';
-import SessionActionType from '../../../store/session/SessionActionType';
 
 const Container = styled.div`
   width: 90%;
-  max-width: 400px;
+  max-width: 500px;
   box-shadow: ${BoxShadow.DARK};
   border-radius: 8px;
   padding: 24px;
@@ -53,7 +51,6 @@ const Description = styled.div`
   font-size: 14px;
   color: ${(p) => p.theme[Color.SUBTITLE]};
   cursor: pointer;
-  text-decoration: unset;
   
   :hover{
     color: ${(p) => p.theme[Color.TEXT_LIGHT]};
@@ -61,33 +58,24 @@ const Description = styled.div`
 `;
 
 const initialValues = {
+  email: '',
   username: '',
   password: '',
+  firstName: '',
+  lastName: '',
 };
 
 const validationSchema = (t) => Yup.object({
-  username: Yup.string(t('login.errors.username.default')).required(t('login.errors.username.required')),
-  password: Yup.string(t('login.errors.password.default')).required(t('login.errors.password.required')),
+  username: Yup.string(t('register.errors.username.default')).required(t('register.errors.username.required')),
+  password: Yup.string(t('register.errors.password.default')).required(t('register.errors.password.required')),
+  email: Yup.string(t('register.errors.email.default')).email(t('register.errors.email.invalid')).required(t('register.errors.email.required')),
+  firstName: Yup.string(t('register.errors.firstName.default')).required(t('register.errors.firstName.required')),
+  lastName: Yup.string(t('register.errors.lastName.default')).required(t('register.errors.lastName.required')),
 });
 
-const Login = () => {
-  const postLogin = useActionCreator(SessionActionType.POST_LOGIN_REQUEST);
-
-  // const handleLogin = () => {
-  //   postLogin({
-  //     username,
-  //     password,
-  //   });
-  // };
-
-  const handleSubmit = (formik) => {
-    console.log(formik);
-    console.log(postLogin);
-
-    // postLogin({
-    //   username,
-    //   password,
-    // });
+const Register = () => {
+  const handleSubmit = () => {
+    console.log('Sumbit');
   };
 
   const { t } = useTranslation();
@@ -107,7 +95,46 @@ const Login = () => {
             <ContainerInput>
               <TextField
                 fullWidth
-                label={t('login.placeholder.username')}
+                label={t('register.placeholder.firstName')}
+                name="firstName"
+                variant="outlined"
+                value={formik.values.firstName}
+                onChange={formik.handleChange}
+                onBlur={() => formik.setFieldTouched('firstName')}
+                error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+                helperText={formik.touched.firstName && formik.errors.firstName}
+              />
+            </ContainerInput>
+            <ContainerInput>
+              <TextField
+                fullWidth
+                label={t('register.placeholder.lastName')}
+                name="lastName"
+                variant="outlined"
+                value={formik.values.lastName}
+                onChange={formik.handleChange}
+                onBlur={() => formik.setFieldTouched('lastName')}
+                error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+                helperText={formik.touched.lastName && formik.errors.lastName}
+              />
+            </ContainerInput>
+            <ContainerInput>
+              <TextField
+                fullWidth
+                label={t('register.placeholder.email')}
+                name="email"
+                variant="outlined"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={() => formik.setFieldTouched('email')}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+              />
+            </ContainerInput>
+            <ContainerInput>
+              <TextField
+                fullWidth
+                label={t('register.placeholder.username')}
                 name="username"
                 variant="outlined"
                 value={formik.values.username}
@@ -132,10 +159,10 @@ const Login = () => {
               />
             </ContainerInput>
             <Button variant="contained" color="primary" fullWidth onClick={formik.handleSubmit}>
-              {t('login.primary')}
+              {t('register.primary')}
             </Button>
-            <Link style={{textDecoration: 'unset'}} to={Routes.AUTHENTICATION.REGISTER}>
-              <Description>{t('login.notYetUser')}</Description>
+            <Link style={{textDecoration: 'unset'}} to={Routes.AUTHENTICATION.LOGIN}>
+              <Description>{t('register.alreadyUser')}</Description>
             </Link>
           </Container>
         </Page>
@@ -144,4 +171,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

@@ -6,6 +6,9 @@ import muiTheme from '../src/muiTheme';
 import i18n from '../src/constants/localization/i18n';
 import { I18nextProvider } from 'react-i18next';
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import configureStore from '../src/store/config/configureStore';
 
 require('../src/index.css');
 
@@ -30,14 +33,19 @@ export const globalTypes = {
 
 export const decorators = [
   (Story, context) => {
+    const store = configureStore();
     return (
-      <I18nextProvider i18n={i18n}>
-        <ThemeProvider theme={Theme[context.globals.theme]}>
-          <MuiThemeProvider theme={muiTheme(context.globals.theme)}>
-            <Story />
-          </MuiThemeProvider>
-        </ThemeProvider>
-      </I18nextProvider>
+      <BrowserRouter>
+        <I18nextProvider i18n={i18n}>
+          <ThemeProvider theme={Theme[context.globals.theme]}>
+            <MuiThemeProvider theme={muiTheme(context.globals.theme)}>
+              <Provider store={store}>
+                <Story />
+              </Provider>
+            </MuiThemeProvider>
+          </ThemeProvider>
+        </I18nextProvider>
+      </BrowserRouter>
     )
   },
 ];
