@@ -56,5 +56,6 @@ export default {
         champions: 'Champions League',
       },
     },
+    primary: 'Crea',
   },
 };

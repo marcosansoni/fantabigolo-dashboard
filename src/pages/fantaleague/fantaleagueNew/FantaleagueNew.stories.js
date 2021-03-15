@@ -2,7 +2,7 @@ import React from 'react';
 import FantaleagueNew from './FantaleagueNew';
 
 export default {
-  title: 'pages/fantaleague/fantaleagueList/fantaleagueList',
+  title: 'pages/fantaleague/fantaleagueNew/fantaleagueNew',
   component: FantaleagueNew,
 };
 

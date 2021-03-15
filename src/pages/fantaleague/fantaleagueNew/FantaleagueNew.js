@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { MenuItem, TextField } from '@material-ui/core';
+import { Button, MenuItem, TextField } from '@material-ui/core';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import PageHeaderTitle from '../../../components/display/pageHeader/PageHeaderTitle';
+import BottomBar from '../../../components/display/bottomBar/BottomBar';
 
 const Container = styled.div`
   height: 100%;
@@ -19,7 +20,7 @@ const Description = styled.div`
 const Form = styled.div`
   display: flex;
   flex-wrap: wrap;
-  padding: 8px 28px;
+  padding: 8px 28px 28px 28px;
 `;
 
 const ContainerInput = styled.div`
@@ -44,7 +45,9 @@ const validationSchema = (t) => Yup.object({
 const FantaleagueNew = () => {
   const { t } = useTranslation();
 
-  const handleSubmit = (e) => console.log(e);
+  const handleSubmit = (formik) => {
+    console.log(formik);
+  };
 
   const validationSchemaFormik = useMemo(() => validationSchema(t), []);
 
@@ -145,10 +148,14 @@ const FantaleagueNew = () => {
                     : t('fantaleague.new.helperText.participants')}
                 />
               </ContainerInput>
+              <BottomBar style={{ justifyContent: 'flex-end' }}>
+                <Button variant="contained" color="primary" onClick={() => formik.handleSubmit()}>{t('fantaleague.new.primary')}</Button>
+              </BottomBar>
             </>
           )}
         </Formik>
       </Form>
+
     </>
   );
 };
