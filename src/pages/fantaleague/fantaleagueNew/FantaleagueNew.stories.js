@@ -10,4 +10,4 @@ const Template = (args) => <FantaleagueNew {...args} />;
 
 export const Default = Template.bind({});
 
-Default.storyName = 'FantaleagueList';
+Default.storyName = 'FantaleagueNew';

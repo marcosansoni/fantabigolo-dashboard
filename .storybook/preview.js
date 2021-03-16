@@ -9,6 +9,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from '../src/store/config/configureStore';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 
 require('../src/index.css');
 

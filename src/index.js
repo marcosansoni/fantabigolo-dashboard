@@ -10,6 +10,7 @@ import './index.css';
 import i18n from './constants/localization/i18n';
 import Theme from './assets/Theme';
 import muiTheme from './muiTheme';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 
 const store = configureStore();
 

@@ -57,5 +57,6 @@ export default {
       },
     },
     primary: 'Crea',
+    cancel: 'Annulla',
   },
 };
