@@ -3,7 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import Routes from './Routes';
-import ErrorManager from '../pages/error/ErrorManager';
 import sessionSelector from '../store/session/selectors/sessionSelector';
 import AuthenticationRouter from '../pages/authentication/AuthenticationRouter';
 import FantaleagueRouter from '../pages/fantaleague/FantaleagueRouter';
@@ -46,7 +45,7 @@ const Routing = () => {
         {/*  <div>Real World still in progress</div> */}
         {/* </Route> */}
       </BrowserRouter>
-      <ErrorManager />
+      {/* <ErrorManager /> */}
     </Page>
   );
 };

@@ -1,5 +1,5 @@
 import { put, select } from 'redux-saga/effects';
-import PathAPI, { urlFactory } from '../../../constants/PathAPI';
+import Endpoint, { urlFactory } from '../../constants/Endpoint';
 import deleteData from '../../utils/fetchMethod/deleteData';
 import SessionActionType from '../SessionActionType';
 import sessionSelector from '../selectors/sessionSelector';
@@ -10,7 +10,7 @@ function* logoutWorker() {
     const { username } = yield select(sessionSelector);
 
     yield deleteData({
-      url: urlFactory(PathAPI.LOGOUT),
+      url: urlFactory(Endpoint.LOGOUT),
       data: { username },
     });
 

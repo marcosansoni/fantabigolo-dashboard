@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
 import getData from '../../utils/fetchMethod/getData';
-import PathAPI, { urlFactory } from '../../../constants/PathAPI';
+import Endpoint, { urlFactory } from '../../constants/Endpoint';
 
 const normalizedParticipant = (response) => {
   if (response?.status === 200 && response?.data) {
@@ -46,24 +46,24 @@ const normalizedTeam = (response) => {
 function* getFantaleagueMethod(leagueId, season) {
   // list of username of participants
   const participantRequest = getData({
-    url: urlFactory(PathAPI.FANTALEAGUE.PARTICIPANT),
+    url: urlFactory(Endpoint.FANTALEAGUE.PARTICIPANT),
     data: { leagueID: leagueId, season },
   });
 
   // list of all teams into league
   const teamRequest = getData({
-    url: urlFactory(PathAPI.FANTALEAGUE.TEAM),
+    url: urlFactory(Endpoint.FANTALEAGUE.TEAM),
     data: { leagueID: leagueId, season },
   });
 
   // username of admin into league
   const adminRequest = getData({
-    url: urlFactory(PathAPI.FANTALEAGUE.ADMIN),
+    url: urlFactory(Endpoint.FANTALEAGUE.ADMIN),
     data: { leagueID: leagueId },
   });
 
   const statusRequest = getData({
-    url: urlFactory(PathAPI.RULES.STATE),
+    url: urlFactory(Endpoint.RULES.STATE),
     data: { leagueID: leagueId, season },
   });
 

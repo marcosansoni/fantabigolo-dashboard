@@ -1,4 +1,4 @@
-const PathAPI = {
+const Endpoint = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   REGISTER: '/register',
@@ -55,4 +55,4 @@ const BASE_PATH = process.env.REACT_APP_BASE_PATH;
 
 export const urlFactory = (endpoint = '') => BASE_PATH + endpoint;
 
-export default PathAPI;
+export default Endpoint;

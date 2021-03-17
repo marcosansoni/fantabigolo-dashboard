@@ -3,7 +3,7 @@ import Severity from '../../message/constants/Severity';
 import actionCreator from '../../utils/actionCreator';
 import MessageActionType from '../../message/MessageActionType';
 import postData from '../../utils/fetchMethod/postData';
-import PathAPI, { urlFactory } from '../../../constants/PathAPI';
+import Endpoint, { urlFactory } from '../../constants/Endpoint';
 import SessionActionType from '../SessionActionType';
 
 function* loginWorker(action) {
@@ -12,7 +12,7 @@ function* loginWorker(action) {
     password,
   } = action?.payload || {};
 
-  const response = yield postData({ url: urlFactory(PathAPI.LOGIN), data: { username, password } });
+  const response = yield postData({ url: urlFactory(Endpoint.LOGIN), data: { username, password } });
 
   const {
     data,

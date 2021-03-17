@@ -3,7 +3,7 @@ import Severity from '../../message/constants/Severity';
 import actionCreator from '../../utils/actionCreator';
 import MessageActionType from '../../message/MessageActionType';
 import postData from '../../utils/fetchMethod/postData';
-import PathAPI, { urlFactory } from '../../../constants/PathAPI';
+import Endpoint, { urlFactory } from '../../constants/Endpoint';
 import SessionActionType from '../SessionActionType';
 
 function* registerWorker(action) {
@@ -17,7 +17,7 @@ function* registerWorker(action) {
   } = action?.payload || {};
 
   const response = yield postData({
-    url: urlFactory(PathAPI.REGISTER),
+    url: urlFactory(Endpoint.REGISTER),
     data: {
       username,
       password,
@@ -58,7 +58,7 @@ function* registerWorker(action) {
     // yield put(snackbarActionCreator('Utente creato con successo', Severity.ERROR));
     //
     // const responseLogin = yield postLogin({ username, password });
-    const responseLogin = yield postData({ url: urlFactory(PathAPI.LOGIN), data: { username, password } });
+    const responseLogin = yield postData({ url: urlFactory(Endpoint.LOGIN), data: { username, password } });
 
     const {
       status: statusLogin,

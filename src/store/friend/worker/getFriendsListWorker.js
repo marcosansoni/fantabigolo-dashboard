@@ -1,5 +1,5 @@
 import getData from '../../utils/fetchMethod/getData';
-import PathAPI, { urlFactory } from '../../../constants/PathAPI';
+import Endpoint, { urlFactory } from '../../constants/Endpoint';
 
 function* getFriendsListWorker(action) {
   const {
@@ -11,7 +11,7 @@ function* getFriendsListWorker(action) {
   // const data =
 
   // const response = yield getFriends({ username });
-  const response = yield getData({ url: urlFactory(PathAPI.FRIEND), data: { username } });
+  const response = yield getData({ url: urlFactory(Endpoint.FRIEND), data: { username } });
   // const response = yield getFriends({ username });
 
   const {

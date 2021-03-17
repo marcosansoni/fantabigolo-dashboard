@@ -1,6 +1,6 @@
 import { all, call } from 'redux-saga/effects';
 import getData from '../../utils/fetchMethod/getData';
-import PathAPI, { urlFactory } from '../../../constants/PathAPI';
+import Endpoint, { urlFactory } from '../../constants/Endpoint';
 import { firstLetterLowerCaseObjectKey } from '../../../utils/firstLetterLowerCase';
 
 const normalizedLeague = (response) => {
@@ -56,49 +56,49 @@ const normalizedPlayers = (response) => {
 
 function* getRealPlayer(playerId, season, session) {
   const nameRequest = getData({
-    url: urlFactory(PathAPI.REAL_PLAYER.NAME),
+    url: urlFactory(Endpoint.REAL_PLAYER.NAME),
     data: { playerID: playerId },
     session,
   });
 
   const birthRequest = getData({
-    url: urlFactory(PathAPI.REAL_PLAYER.BIRTH),
+    url: urlFactory(Endpoint.REAL_PLAYER.BIRTH),
     data: { playerID: playerId },
     session,
   });
 
   const birthPlaceRequest = getData({
-    url: urlFactory(PathAPI.REAL_PLAYER.BIRTHPLACE),
+    url: urlFactory(Endpoint.REAL_PLAYER.BIRTHPLACE),
     data: { playerID: playerId },
     session,
   });
 
   const nationRequest = getData({
-    url: urlFactory(PathAPI.REAL_PLAYER.NATION),
+    url: urlFactory(Endpoint.REAL_PLAYER.NATION),
     data: { playerID: playerId },
     session,
   });
 
   const teamRequest = getData({
-    url: urlFactory(PathAPI.REAL_PLAYER.TEAM),
+    url: urlFactory(Endpoint.REAL_PLAYER.TEAM),
     data: { playerID: playerId, season },
     session,
   });
 
   const roleRequest = getData({
-    url: urlFactory(PathAPI.REAL_PLAYER.ROLE),
+    url: urlFactory(Endpoint.REAL_PLAYER.ROLE),
     data: { playerID: playerId },
     session,
   });
 
   const heightRequest = getData({
-    url: urlFactory(PathAPI.REAL_PLAYER.HEIGHT),
+    url: urlFactory(Endpoint.REAL_PLAYER.HEIGHT),
     data: { playerID: playerId },
     session,
   });
 
   const weightRequest = getData({
-    url: urlFactory(PathAPI.REAL_PLAYER.WEIGHT),
+    url: urlFactory(Endpoint.REAL_PLAYER.WEIGHT),
     data: { playerID: playerId },
     session,
   });

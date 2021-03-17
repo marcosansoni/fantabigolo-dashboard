@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
 import getData from '../../utils/fetchMethod/getData';
-import PathAPI, { urlFactory } from '../../../constants/PathAPI';
+import Endpoint, { urlFactory } from '../../constants/Endpoint';
 
 const normalizedName = (response) => {
   if (response?.status === 200 && response?.data) {
@@ -54,37 +54,37 @@ function* getRealLeague({ leagueId = 891, session }) {
   // ]);
 
   const nameRequest = getData({
-    url: urlFactory(PathAPI.REAL_LEAGUE.NAME),
+    url: urlFactory(Endpoint.REAL_LEAGUE.NAME),
     data: { leagueID: leagueId },
     session,
   });
 
   const nationRequest = getData({
-    url: urlFactory(PathAPI.REAL_LEAGUE.NATION),
+    url: urlFactory(Endpoint.REAL_LEAGUE.NATION),
     data: { leagueID: leagueId },
     session,
   });
 
   const logoRequest = getData({
-    url: urlFactory(PathAPI.REAL_LEAGUE.LOGO),
+    url: urlFactory(Endpoint.REAL_LEAGUE.LOGO),
     data: { leagueID: leagueId },
     session,
   });
 
   const seasonRequest = getData({
-    url: urlFactory(PathAPI.REAL_LEAGUE.SEASON),
+    url: urlFactory(Endpoint.REAL_LEAGUE.SEASON),
     data: { leagueID: leagueId },
     session,
   });
 
   const dateRequest = getData({
-    url: urlFactory(PathAPI.REAL_LEAGUE.DATES),
+    url: urlFactory(Endpoint.REAL_LEAGUE.DATES),
     data: { leagueID: leagueId },
     session,
   });
 
   const teamsRequest = getData({
-    url: urlFactory(PathAPI.REAL_LEAGUE.TEAMS),
+    url: urlFactory(Endpoint.REAL_LEAGUE.TEAMS),
     data: { leagueID: leagueId },
     session,
   });

@@ -9,6 +9,7 @@ import BoxShadow from '../../../assets/BoxShadow';
 import Color from '../../../assets/Color';
 import Font from '../../../assets/Font';
 import Routes from '../../../route/Routes';
+import MediaQuerySelector from '../../../constants/responsive/MediaQuerySelector';
 
 const Container = styled.div`
   width: 90%;
@@ -16,6 +17,17 @@ const Container = styled.div`
   box-shadow: ${BoxShadow.DARK};
   border-radius: 8px;
   padding: 24px;
+
+  ${MediaQuerySelector.MEDIUM}{
+    padding: 16px;
+  }
+
+  ${MediaQuerySelector.SMALL}{
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 24px;
+  }
 `;
 
 const Page = styled.div`

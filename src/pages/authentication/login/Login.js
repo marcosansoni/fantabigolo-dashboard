@@ -1,23 +1,38 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import * as Yup from 'yup';
-import { Button, TextField } from '@material-ui/core';
+import { Slide, Snackbar, TextField } from '@material-ui/core';
 import { Formik } from 'formik';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import LoadingButton from '@material-ui/lab/LoadingButton';
 import BoxShadow from '../../../assets/BoxShadow';
 import Color from '../../../assets/Color';
 import Font from '../../../assets/Font';
 import Routes from '../../../route/Routes';
-import useActionCreator from '../../../store/utils/useActionCreator';
-import SessionActionType from '../../../store/session/SessionActionType';
+import MediaQuerySelector from '../../../constants/responsive/MediaQuerySelector';
+import postLoginActionCreator, { POST_LOGIN } from '../../../store/authentication/login/actionCreator/postLoginActionCreator';
+import { useLoginError } from '../../../store/authentication/login/selectors/loginErrorSelector';
+import { useFetchType } from '../../../store/common/selectors/fetchSelector';
+import postLoginErrorActionCreator from '../../../store/authentication/login/actionCreator/postLoginErrorActionCreator';
 
 const Container = styled.div`
-  width: 90%;
-  max-width: 400px;
+  width: 400px;
   box-shadow: ${BoxShadow.DARK};
   border-radius: 8px;
   padding: 24px;
+
+  ${MediaQuerySelector.MEDIUM} {
+    padding: 16px;
+  }
+
+  ${MediaQuerySelector.SMALL} {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 24px;
+  }
 `;
 
 const Page = styled.div`
@@ -54,8 +69,8 @@ const Description = styled.div`
   color: ${(p) => p.theme[Color.SUBTITLE]};
   cursor: pointer;
   text-decoration: unset;
-  
-  :hover{
+
+  :hover {
     color: ${(p) => p.theme[Color.TEXT_LIGHT]};
   }
 `;
@@ -71,28 +86,39 @@ const validationSchema = (t) => Yup.object({
 });
 
 const Login = () => {
-  const postLogin = useActionCreator(SessionActionType.POST_LOGIN_REQUEST);
+  const dispatch = useDispatch();
 
-  // const handleLogin = () => {
-  //   postLogin({
-  //     username,
-  //     password,
-  //   });
-  // };
+  const loginError = useLoginError();
+  const fetching = useFetchType(POST_LOGIN);
 
-  const handleSubmit = (formik) => {
-    console.log(formik);
-    console.log(postLogin);
-
-    // postLogin({
-    //   username,
-    //   password,
-    // });
-  };
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState(false);
 
   const { t } = useTranslation();
 
   const validationSchemaFormik = useMemo(() => validationSchema(t), []);
+
+  useEffect(() => {
+    console.log(loginError.length);
+    if (loginError?.length) {
+      setSnackbarOpen(true);
+      setSnackbarMessage(loginError[0]?.message);
+    }
+  }, [loginError]);
+
+  useEffect(() => () => {
+    if (loginError.length) dispatch(postLoginErrorActionCreator([]));
+  }, []);
+
+  const handleSubmit = (formik) => {
+    const { username, password } = formik;
+    dispatch(postLoginActionCreator(username, password));
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+    dispatch(postLoginErrorActionCreator([]));
+  };
 
   return (
     <Formik
@@ -102,10 +128,19 @@ const Login = () => {
     >
       {(formik) => (
         <Page>
+          <Snackbar
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            open={snackbarOpen}
+            onClose={() => handleSnackbarClose()}
+            TransitionComponent={(p) => (<Slide {...p} direction="up" />)}
+            message={snackbarMessage}
+            autoHideDuration={3000}
+          />
           <Container>
             <Title>{t('common.brand')}</Title>
             <ContainerInput>
               <TextField
+                disabled={fetching}
                 fullWidth
                 label={t('login.placeholder.username')}
                 name="username"
@@ -119,6 +154,7 @@ const Login = () => {
             </ContainerInput>
             <ContainerInput>
               <TextField
+                disabled={fetching}
                 fullWidth
                 type="password"
                 label={t('login.placeholder.password')}
@@ -131,10 +167,16 @@ const Login = () => {
                 helperText={formik.touched.password && formik.errors.password}
               />
             </ContainerInput>
-            <Button variant="contained" color="primary" fullWidth onClick={formik.handleSubmit}>
+            <LoadingButton
+              pending={fetching}
+              variant="contained"
+              color="primary"
+              fullWidth
+              onClick={formik.handleSubmit}
+            >
               {t('login.primary')}
-            </Button>
-            <Link style={{textDecoration: 'unset'}} to={Routes.AUTHENTICATION.REGISTER}>
+            </LoadingButton>
+            <Link style={{ textDecoration: 'unset' }} to={Routes.AUTHENTICATION.REGISTER}>
               <Description>{t('login.notYetUser')}</Description>
             </Link>
           </Container>
