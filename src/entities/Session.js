@@ -4,7 +4,7 @@ class Session {
   }
 
   get isValid() {
-    return Boolean(this.session);
+    return Boolean(this.session?.length);
   }
 }
 

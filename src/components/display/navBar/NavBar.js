@@ -4,7 +4,11 @@ import { AppBar, IconButton, MenuItem, Popover, Toolbar } from '@material-ui/cor
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Font from '../../../assets/Font';
+import logoutActionCreator from '../../../store/authentication/logout/actionCreator/logoutActionCreator';
+import Routes from '../../../route/Routes';
 
 const Content = styled.div`
   width: 100%;
@@ -31,6 +35,14 @@ const NavBar = (props) => {
 
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const menuRef = useRef();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleLogout = () => {
+    dispatch(logoutActionCreator());
+    setIsUserMenuOpen(false);
+    history.push(Routes.AUTHENTICATION.LOGIN);
+  };
 
   return (
     <AppBar position="static" style={style} className={className}>
@@ -66,7 +78,10 @@ const NavBar = (props) => {
           disableRestoreFocus
         >
           <ContainerUserMenu>
-            <MenuItem style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
+            <MenuItem
+              style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}
+              onClick={handleLogout}
+            >
               {t('common.logout')}
             </MenuItem>
           </ContainerUserMenu>

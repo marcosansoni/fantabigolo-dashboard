@@ -1,6 +1,7 @@
 import { actionStatusSuccess } from '../../constants/ActionStatus';
 import Session from '../../../entities/Session';
 import { POST_LOGIN } from '../../authentication/login/actionCreator/postLoginActionCreator';
+import { LOGOUT } from '../../authentication/logout/actionCreator/logoutActionCreator';
 
 const sessionReducer = (state = new Session(), action) => {
   switch (action.type) {
@@ -9,6 +10,8 @@ const sessionReducer = (state = new Session(), action) => {
         return action.payload.session;
       }
       return state instanceof Session ? state : new Session(state);
+    case LOGOUT:
+      return new Session();
     default:
       return state instanceof Session ? state : new Session(state);
   }
