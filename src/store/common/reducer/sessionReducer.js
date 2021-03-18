@@ -5,12 +5,12 @@ import { POST_LOGIN } from '../../authentication/login/actionCreator/postLoginAc
 const sessionReducer = (state = new Session(), action) => {
   switch (action.type) {
     case actionStatusSuccess(POST_LOGIN):
-      if (action.payload.session instanceof Session) {
+      if (action.payload.session) {
         return action.payload.session;
       }
-      return state;
+      return state instanceof Session ? state : new Session(state);
     default:
-      return state;
+      return state instanceof Session ? state : new Session(state);
   }
 };
 

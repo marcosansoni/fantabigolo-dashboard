@@ -6,6 +6,7 @@ import Routes from './Routes';
 import sessionSelector from '../store/session/selectors/sessionSelector';
 import AuthenticationRouter from '../pages/authentication/AuthenticationRouter';
 import FantaleagueRouter from '../pages/fantaleague/FantaleagueRouter';
+import HomeRouter from '../pages/home/HomeRouter';
 
 const Page = styled.div`
   width: 100vw;
@@ -35,9 +36,7 @@ const Routing = () => {
         {/* </Route> */}
         <AuthenticationRouter />
         <FantaleagueRouter />
-        {/* <Route exact path={Routes.HOME}> */}
-        {/*  <Home /> */}
-        {/* </Route> */}
+        <HomeRouter />
         {/* <Route path={Routes.FANTALEAGUE.HOME}> */}
         {/*  <RoutingFantaLeague /> */}
         {/* </Route> */}

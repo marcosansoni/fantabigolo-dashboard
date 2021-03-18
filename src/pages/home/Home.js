@@ -1,26 +1,37 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import useActionCreator from '../../store/utils/useActionCreator';
-import FantaleagueActionType from '../../store/fantaleague/FantaleagueActionType';
-import fantaleagueFetchingSelector
-  from '../../store/fantaleague/selectors/fantaleagueFetchingSelector';
+import React from 'react';
+import styled from 'styled-components';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import NavBar from '../../components/display/navBar/NavBar';
+
+const Center = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Container = styled.div`
+  margin-top: -64px;
+  padding-top: 64px;
+  width: 100%;
+  height: 100%;
+`;
 
 const Home = () => {
-  const isFetching = useSelector(fantaleagueFetchingSelector);
-
-  const getCompetitions = useActionCreator(
-    FantaleagueActionType.GET_FANTA_LEAGUE_BY_USERNAME_REQUEST,
-  );
-
-  useEffect(() => getCompetitions(), []);
+  console.log('Home page');
 
   return (
-    <div>
-      {isFetching && (
-        <div>Fetching data ...</div>
-      )}
-      <div>Home</div>
-    </div>
+    <>
+      <NavBar />
+      <Container>
+        <PerfectScrollbar>
+          <Center>
+            To the fantaleague
+          </Center>
+        </PerfectScrollbar>
+      </Container>
+    </>
   );
 };
 

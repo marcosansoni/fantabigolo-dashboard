@@ -4,7 +4,7 @@ import { Slide, Snackbar, TextField } from '@material-ui/core';
 import { Formik } from 'formik';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoadingButton from '@material-ui/lab/LoadingButton';
 import BoxShadow from '../../../assets/BoxShadow';
@@ -16,6 +16,7 @@ import postLoginActionCreator, { POST_LOGIN } from '../../../store/authenticatio
 import { useLoginError } from '../../../store/authentication/login/selectors/loginErrorSelector';
 import { useFetchType } from '../../../store/common/selectors/fetchSelector';
 import postLoginErrorActionCreator from '../../../store/authentication/login/actionCreator/postLoginErrorActionCreator';
+import { useSession } from '../../../store/common/selectors/sessionSelector';
 
 const Container = styled.div`
   width: 400px;
@@ -90,6 +91,8 @@ const Login = () => {
 
   const loginError = useLoginError();
   const fetching = useFetchType(POST_LOGIN);
+  const session = useSession();
+  const history = useHistory();
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState(false);
@@ -99,16 +102,21 @@ const Login = () => {
   const validationSchemaFormik = useMemo(() => validationSchema(t), []);
 
   useEffect(() => {
-    console.log(loginError.length);
     if (loginError?.length) {
       setSnackbarOpen(true);
       setSnackbarMessage(loginError[0]?.message);
     }
   }, [loginError]);
 
+  // Clean errors associated at login when unmount
   useEffect(() => () => {
     if (loginError.length) dispatch(postLoginErrorActionCreator([]));
   }, []);
+
+  // Redirect after successful login
+  useEffect(() => {
+    if (session.isValid) history.push(Routes.HOME);
+  }, [session]);
 
   const handleSubmit = (formik) => {
     const { username, password } = formik;
