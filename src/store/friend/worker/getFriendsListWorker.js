@@ -6,7 +6,7 @@ function* getFriendsListWorker(action) {
     username,
   } = action?.payload || {};
 
-  console.log('here', username);
+  // console.log('here', username);
 
   // const data =
 
@@ -15,11 +15,11 @@ function* getFriendsListWorker(action) {
   // const response = yield getFriends({ username });
 
   const {
-    data,
+    // data,
     status,
   } = response || {};
 
-  console.log(data);
+  // console.log(data);
 
   if (status === 404) {
     // yield put(snackbarActionCreator('User not found', Severity.ERROR));
@@ -27,7 +27,7 @@ function* getFriendsListWorker(action) {
   }
 
   if (status === 200) {
-    console.log(response);
+    // console.log(response);
     // const {
     //   firstname: firstName,
     //   lastname: lastName,

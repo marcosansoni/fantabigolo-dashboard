@@ -44,8 +44,6 @@ export const MatchStatus = {
 const MatchCard = (props) => {
   const { style, className, league, home, away, fixtures, status } = props;
 
-  console.log(home, away, fixtures, status);
-
   const renderResult = (team) => {
     if (!team || team.points === undefined || team.goal === undefined) return undefined;
     return (

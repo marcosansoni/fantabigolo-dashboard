@@ -154,7 +154,7 @@ function* getRealPlayers({ playerIds = [], season = 2019, session }) {
     session,
   )));
 
-  console.log(playerResponse);
+  // console.log(playerResponse);
   // playerResponse.forEach((res, index) => {
   //   teamById = {
   //     ...teamById,

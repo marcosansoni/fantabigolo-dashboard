@@ -2,25 +2,25 @@ import { select } from 'redux-saga/effects';
 import userSelector from '../../user/selectors/userSelector';
 import getFantaLeagueByUsernameWorker from './getFantaLeagueByUsernameWorker';
 
-function* createFantaLeagueWorker(action) {
+function* createFantaLeagueWorker() {
   try {
-    const {
-      leagueName,
-      teamName,
-      inviteVisibility = 0,
-      competition = 1,
-      participants, // Number of partecipants
-    } = action?.payload;
+    // const {
+    //   leagueName,
+    //   teamName,
+    //   inviteVisibility = 0,
+    //   competition = 1,
+    //   participants, // Number of partecipants
+    // } = action?.payload;
 
-    const data = {
-      leagueName,
-      teamName,
-      inviteVisibility,
-      competition,
-      partecipants: participants,
-    };
+    // const data = {
+    //   leagueName,
+    //   teamName,
+    //   inviteVisibility,
+    //   competition,
+    //   partecipants: participants,
+    // };
 
-    console.log(data);
+    // console.log(data);
 
     // console.log(urlFactory(PathAPI.FANTALEAGUE.NEW));
     // console.log(data)
@@ -37,7 +37,7 @@ function* createFantaLeagueWorker(action) {
     //
     // }
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 }
 

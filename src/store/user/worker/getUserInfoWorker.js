@@ -31,7 +31,7 @@ function* getUserInfoWorker(action) {
     return yield put(actionCreator({ type: UserActionType.GET_USER_INFO }));
   }
 
-  console.log(data);
+  // console.log(data);
 
   if (status === 200) {
     const {

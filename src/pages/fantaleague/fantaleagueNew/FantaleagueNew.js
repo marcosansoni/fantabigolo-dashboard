@@ -59,11 +59,13 @@ const validationSchema = (t) => Yup.object({
 const FantaleagueNew = () => {
   const { t } = useTranslation();
 
-  const handleSubmit = (formik) => {
-    console.log(formik);
+  const handleSubmit = () => {
+    // console.log(formik);
   };
 
-  const handleCancel = () => console.log('Cancel');
+  const handleCancel = () => {
+    // console.log('Cancel');
+  };
 
   const validationSchemaFormik = useMemo(() => validationSchema(t), []);
 

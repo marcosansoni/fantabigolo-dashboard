@@ -21,11 +21,11 @@ function* getFantaLeagueByUsernameWorker(action) {
 
     const response = yield getData({ url: urlFactory(Endpoint.USER.PARTICIPANT), data });
 
-    console.log(response);
+    // console.log(response);
 
     const participation = response?.data?.Partecipations || [];
 
-    console.log(participation);
+    // console.log(participation);
 
     let byId = {};
     let fantateamById = {};
@@ -75,7 +75,7 @@ function* getFantaLeagueByUsernameWorker(action) {
     // Stop fetching
     return yield put(actionCreator(FantaleagueActionType.GET_FANTA_LEAGUE_BY_USERNAME));
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 }
 

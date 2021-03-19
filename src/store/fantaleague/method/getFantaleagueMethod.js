@@ -77,12 +77,12 @@ function* getFantaleagueMethod(leagueId, season) {
   const adminResponse = response && response.length && response[0];
   const participantResponse = response && response.length > 1 && response[1];
   const teamResponse = response && response.length > 2 && response[2];
-  const statusResponse = response && response.length > 3 && response[3];
+  // const statusResponse = response && response.length > 3 && response[3];
 
   const admin = adminResponse && normalizedAdmin(adminResponse);
   const participant = participantResponse && normalizedParticipant(participantResponse);
   const team = teamResponse && normalizedTeam(teamResponse);
-  console.log(statusResponse);
+  // console.log(statusResponse);
 
   return {
     ...(admin.length && { admin }),
