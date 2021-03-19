@@ -7,6 +7,8 @@ import PageHeaderTitle from '../../../components/display/pageHeader/PageHeaderTi
 import Tabs from '../../../components/display/tab/Tabs';
 import Tab from '../../../components/display/tab/Tab';
 import Routes from '../../../route/Routes';
+import NavBar from '../../../components/display/navBar/NavBar';
+import Page from '../../../components/display/navBar/Page';
 
 const StyledLink = styled(Link)`
   color: inherit;
@@ -17,20 +19,26 @@ const FantaleagueList = () => {
   const { t } = useTranslation();
 
   return (
-    <PageHeaderTitle
-      title={t('fantaleague.list.title')}
-      rightContent={(
-        <Button variant="contained" color="primary">
-          <StyledLink to={Routes.FANTALEAGUE.NEW}>
-            {t('fantaleague.list.add')}
-          </StyledLink>
-        </Button>
-      )}
-    >
-      <Tabs>
-        <Tab label={t('fantaleague.list.tabs.recent')} />
-      </Tabs>
-    </PageHeaderTitle>
+    <>
+      <NavBar />
+      <Page>
+        <PageHeaderTitle
+          title={t('fantaleague.list.title')}
+          rightContent={(
+            <Button variant="contained" color="primary">
+              <StyledLink to={Routes.FANTALEAGUE.NEW}>
+                {t('fantaleague.list.add')}
+              </StyledLink>
+            </Button>
+          )}
+        >
+          <Tabs>
+            <Tab label={t('fantaleague.list.tabs.recent')} />
+          </Tabs>
+        </PageHeaderTitle>
+      </Page>
+    </>
+
   );
 };
 

@@ -28,7 +28,7 @@ const Home = () => {
   return (
     <>
       <NavBar>
-        <StyledLink to={Routes.FANTALEAGUE.HOME}>
+        <StyledLink to={Routes.FANTALEAGUE.LIST}>
           {t('home.navbar.fantaleague')}
         </StyledLink>
       </NavBar>
