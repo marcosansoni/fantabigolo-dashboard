@@ -1,4 +1,4 @@
-import { actionStatusError } from '../../../constants/ActionStatus';
+import { actionStatusError } from '../../../../constants/ActionStatus';
 import { POST_LOGIN } from '../actionCreator/postLoginActionCreator';
 
 const loginErrorsReducer = (state = [], action) => {

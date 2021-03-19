@@ -5,7 +5,7 @@ import Routes from './Routes';
 import AuthenticationRouter from '../pages/authentication/AuthenticationRouter';
 import FantaleagueRouter from '../pages/fantaleague/FantaleagueRouter';
 import HomeRouter from '../pages/home/HomeRouter';
-import { useSession } from '../store/common/selectors/sessionSelector';
+import { useSession } from '../store/state/common/selectors/sessionSelector';
 
 const Page = styled.div`
   width: 100vw;

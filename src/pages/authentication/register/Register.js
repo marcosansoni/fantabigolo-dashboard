@@ -12,12 +12,12 @@ import Color from '../../../assets/Color';
 import Font from '../../../assets/Font';
 import Routes from '../../../route/Routes';
 import MediaQuerySelector from '../../../constants/responsive/MediaQuerySelector';
-import { useFetchType } from '../../../store/common/selectors/fetchSelector';
-import { useSession } from '../../../store/common/selectors/sessionSelector';
-import { useRegisterError } from '../../../store/authentication/register/selectors/registerErrorSelector';
-import postRegisterActionCreator, { POST_REGISTER } from '../../../store/authentication/register/actionCreator/postRegisterActionCreator';
+import { useFetchType } from '../../../store/state/common/selectors/fetchSelector';
+import { useSession } from '../../../store/state/common/selectors/sessionSelector';
+import { useRegisterError } from '../../../store/state/authentication/register/selectors/registerErrorSelector';
+import postRegisterActionCreator, { POST_REGISTER } from '../../../store/state/authentication/register/actionCreator/postRegisterActionCreator';
 import postRegisterErrorActionCreator
-  from '../../../store/authentication/register/actionCreator/postRegisterErrorActionCreator';
+  from '../../../store/state/authentication/register/actionCreator/postRegisterErrorActionCreator';
 
 const Container = styled.div`
   width: 90%;

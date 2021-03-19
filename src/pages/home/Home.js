@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import PerfectScrollbar from 'react-perfect-scrollbar';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import NavBar from '../../components/display/navBar/NavBar';
+import Color from '../../assets/Color';
+import Page from '../../components/display/navBar/Page';
+import Routes from '../../route/Routes';
 
 const Center = styled.div`
   width: 100%;
@@ -11,26 +15,28 @@ const Center = styled.div`
   justify-content: center;
 `;
 
-const Container = styled.div`
-  margin-top: -64px;
-  padding-top: 64px;
-  width: 100%;
-  height: 100%;
+const StyledLink = styled(Link)`
+  text-decoration: unset;
+  font-size: 18px;
+  color: ${(p) => p.theme[Color.BACKGROUND]};
+  padding: 0 32px;
 `;
 
 const Home = () => {
-  console.log('Home page');
+  const { t } = useTranslation();
 
   return (
     <>
-      <NavBar />
-      <Container>
-        <PerfectScrollbar>
-          <Center>
-            To the fantaleague
-          </Center>
-        </PerfectScrollbar>
-      </Container>
+      <NavBar>
+        <StyledLink to={Routes.FANTALEAGUE.HOME}>
+          {t('home.navbar.fantaleague')}
+        </StyledLink>
+      </NavBar>
+      <Page>
+        <Center>
+          The best is yet to come
+        </Center>
+      </Page>
     </>
   );
 };

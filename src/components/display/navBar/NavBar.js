@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import Font from '../../../assets/Font';
-import logoutActionCreator from '../../../store/authentication/logout/actionCreator/logoutActionCreator';
+import logoutActionCreator from '../../../store/state/authentication/logout/actionCreator/logoutActionCreator';
 import Routes from '../../../route/Routes';
 
 const Content = styled.div`

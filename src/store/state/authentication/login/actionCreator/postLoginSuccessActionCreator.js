@@ -1,4 +1,4 @@
-import { actionStatusSuccess } from '../../../constants/ActionStatus';
+import { actionStatusSuccess } from '../../../../constants/ActionStatus';
 import { POST_LOGIN } from './postLoginActionCreator';
 
 const postLoginSuccessActionCreator = (session) => ({

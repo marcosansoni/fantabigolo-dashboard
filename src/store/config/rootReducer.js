@@ -6,8 +6,8 @@ import FriendCombinedReducers from '../friend/FriendCombinedReducers';
 import FantaleagueCombinedReducers from '../fantaleague/FantaleagueCombinedReducers';
 import FantateamCombinedReducers from '../fantateam/FantateamCombinedReducers';
 import RealWorldCombinedReducers from '../realWorld/RealWorldCombinedReducers';
-import commonCombineReducers from '../common/commonCombineReducers';
-import authenticationCombineReducers from '../authentication/authenticationCombineReducers';
+import commonCombineReducers from '../state/common/commonCombineReducers';
+import authenticationCombineReducers from '../state/authentication/authenticationCombineReducers';
 
 export default combineReducers({
   ui: CombinedReducersUI,

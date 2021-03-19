@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga/effects';
-import { actionStatusRequest } from '../../constants/ActionStatus';
+import { actionStatusRequest } from '../../../constants/ActionStatus';
 import { POST_LOGIN } from './actionCreator/postLoginActionCreator';
 import postLoginWorker from './worker/postLoginWorker';
 

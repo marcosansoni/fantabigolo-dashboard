@@ -1,12 +1,12 @@
 import { put } from 'redux-saga/effects';
-import Endpoint, { urlFactory } from '../../../constants/Endpoint';
-import postData from '../../../utils/fetchMethod/postData';
-import EndpointStatus from '../../../constants/EndpointStatus';
+import Endpoint, { urlFactory } from '../../../../constants/Endpoint';
+import postData from '../../../../utils/fetchMethod/postData';
+import EndpointStatus from '../../../../constants/EndpointStatus';
 import RegisterErrorCode from '../constants/RegisterErrorCode';
 import postRegisterSuccessActionCreator from '../actionCreator/postRegisterSuccessActionCreator';
-import ErrorCode from '../../../constants/ErrorCode';
+import ErrorCode from '../../../../constants/ErrorCode';
 import postRegisterErrorActionCreator from '../actionCreator/postRegisterErrorActionCreator';
-import Error from '../../../../entities/Error';
+import Error from '../../../../../entities/Error';
 import postLoginActionCreator from '../../login/actionCreator/postLoginActionCreator';
 
 function* postRegisterWorker(action) {

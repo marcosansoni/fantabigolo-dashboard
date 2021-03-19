@@ -1,6 +1,6 @@
 import { select } from 'redux-saga/effects';
 import axios from 'axios';
-import sessionSelector from '../../common/selectors/sessionSelector';
+import sessionSelector from '../../state/common/selectors/sessionSelector';
 
 function* deleteData({ url, data }) {
   // Get the session used for api call

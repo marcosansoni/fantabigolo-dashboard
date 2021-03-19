@@ -1,4 +1,4 @@
-import { actionStatusRequest } from '../../../constants/ActionStatus';
+import { actionStatusRequest } from '../../../../constants/ActionStatus';
 
 export const POST_LOGIN = 'POST_LOGIN';
 

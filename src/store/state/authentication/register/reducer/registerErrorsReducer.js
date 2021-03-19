@@ -1,4 +1,4 @@
-import { actionStatusError } from '../../../constants/ActionStatus';
+import { actionStatusError } from '../../../../constants/ActionStatus';
 import { POST_REGISTER } from '../actionCreator/postRegisterActionCreator';
 
 const registerErrorsReducer = (state = [], action) => {

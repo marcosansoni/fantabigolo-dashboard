@@ -1,4 +1,4 @@
-import ActionStatus, { getActionStatus, getActionType } from '../../constants/ActionStatus';
+import ActionStatus, { getActionStatus, getActionType } from '../../../constants/ActionStatus';
 
 const fetchReducer = (state = [], action) => {
   const status = getActionStatus(action?.type);
