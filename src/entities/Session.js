@@ -1,10 +1,10 @@
 class Session {
-  constructor(session) {
-    this.session = session;
+  constructor(data) {
+    this.code = data?.code;
   }
 
   get isValid() {
-    return Boolean(this.session?.length);
+    return Boolean(this.code);
   }
 }
 

@@ -1,10 +1,10 @@
 import { select } from 'redux-saga/effects';
 import axios from 'axios';
-import sessionSelector from '../../session/selectors/sessionSelector';
+import sessionSelector from '../../common/selectors/sessionSelector';
 
 function* deleteData({ url, data }) {
   // Get the session used for api call
-  const { session: sessionID } = yield select(sessionSelector);
+  const sessionID = yield select(sessionSelector);
 
   return yield axios.delete(url, {
     headers: {

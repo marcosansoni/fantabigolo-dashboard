@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Font from '../../../assets/Font';
 import logoutActionCreator from '../../../store/authentication/logout/actionCreator/logoutActionCreator';
 import Routes from '../../../route/Routes';
@@ -20,13 +20,15 @@ const Right = styled.div`
   justify-content: flex-end;
 `;
 
-const Title = styled.div`
-  font-family: ${Font.SEMIBOLD};
-  font-size: 24px;
-`;
-
 const ContainerUserMenu = styled.div`
   //width: 200px;
+`;
+
+const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: unset;
+  font-family: ${Font.SEMIBOLD};
+  font-size: 24px;
 `;
 
 const NavBar = (props) => {
@@ -47,7 +49,9 @@ const NavBar = (props) => {
   return (
     <AppBar position="static" style={style} className={className}>
       <Toolbar style={{ justifyContent: 'space-between', flex: '1 100%' }}>
-        <Title>{t('common.brand')}</Title>
+        <StyledLink to={Routes.HOME}>
+          {t('common.brand')}
+        </StyledLink>
         <Content>
           {children}
         </Content>
@@ -79,7 +83,7 @@ const NavBar = (props) => {
         >
           <ContainerUserMenu>
             <MenuItem
-              style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}
+              style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}
               onClick={handleLogout}
             >
               {t('common.logout')}

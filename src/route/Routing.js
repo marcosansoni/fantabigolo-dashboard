@@ -1,12 +1,11 @@
 import { BrowserRouter, Redirect } from 'react-router-dom';
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import Routes from './Routes';
-import sessionSelector from '../store/session/selectors/sessionSelector';
 import AuthenticationRouter from '../pages/authentication/AuthenticationRouter';
 import FantaleagueRouter from '../pages/fantaleague/FantaleagueRouter';
 import HomeRouter from '../pages/home/HomeRouter';
+import { useSession } from '../store/common/selectors/sessionSelector';
 
 const Page = styled.div`
   width: 100vw;
@@ -17,7 +16,7 @@ const Page = styled.div`
 `;
 
 const Routing = () => {
-  const { session } = useSelector(sessionSelector);
+  const session = useSession();
 
   return (
     <Page>

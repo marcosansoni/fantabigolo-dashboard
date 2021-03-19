@@ -1,15 +1,23 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import * as Yup from 'yup';
-import { Button, TextField } from '@material-ui/core';
+import { Slide, Snackbar, TextField } from '@material-ui/core';
 import { Formik } from 'formik';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import LoadingButton from '@material-ui/lab/LoadingButton';
 import BoxShadow from '../../../assets/BoxShadow';
 import Color from '../../../assets/Color';
 import Font from '../../../assets/Font';
 import Routes from '../../../route/Routes';
 import MediaQuerySelector from '../../../constants/responsive/MediaQuerySelector';
+import { useFetchType } from '../../../store/common/selectors/fetchSelector';
+import { useSession } from '../../../store/common/selectors/sessionSelector';
+import { useRegisterError } from '../../../store/authentication/register/selectors/registerErrorSelector';
+import postRegisterActionCreator, { POST_REGISTER } from '../../../store/authentication/register/actionCreator/postRegisterActionCreator';
+import postRegisterErrorActionCreator
+  from '../../../store/authentication/register/actionCreator/postRegisterErrorActionCreator';
 
 const Container = styled.div`
   width: 90%;
@@ -18,11 +26,11 @@ const Container = styled.div`
   border-radius: 8px;
   padding: 24px;
 
-  ${MediaQuerySelector.MEDIUM}{
+  ${MediaQuerySelector.MEDIUM} {
     padding: 16px;
   }
 
-  ${MediaQuerySelector.SMALL}{
+  ${MediaQuerySelector.SMALL} {
     width: 100%;
     border-radius: 0;
     box-shadow: none;
@@ -63,8 +71,8 @@ const Description = styled.div`
   font-size: 14px;
   color: ${(p) => p.theme[Color.SUBTITLE]};
   cursor: pointer;
-  
-  :hover{
+
+  :hover {
     color: ${(p) => p.theme[Color.TEXT_LIGHT]};
   }
 `;
@@ -86,13 +94,47 @@ const validationSchema = (t) => Yup.object({
 });
 
 const Register = () => {
-  const handleSubmit = () => {
-    console.log('Sumbit');
-  };
+  const dispatch = useDispatch();
 
+  const registerError = useRegisterError();
+  const fetching = useFetchType(POST_REGISTER);
+  const session = useSession();
+  const history = useHistory();
   const { t } = useTranslation();
 
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState(false);
+
   const validationSchemaFormik = useMemo(() => validationSchema(t), []);
+
+  useEffect(() => {
+    if (registerError?.length) {
+      setSnackbarOpen(true);
+      setSnackbarMessage(registerError[0]?.message);
+    }
+  }, [registerError]);
+
+  // Clean errors associated at register when unmount
+  useEffect(() => () => {
+    if (registerError.length) dispatch(postRegisterErrorActionCreator([]));
+  }, []);
+
+  // Redirect after successful registration
+  useEffect(() => {
+    if (session.isValid) history.push(Routes.HOME);
+  }, [session]);
+
+  const handleSubmit = (formik) => {
+    const { username, password, email, firstName, lastName } = formik;
+    dispatch(postRegisterActionCreator({
+      username, password, firstName, lastName, email,
+    }));
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+    dispatch(postRegisterErrorActionCreator([]));
+  };
 
   return (
     <Formik
@@ -102,6 +144,14 @@ const Register = () => {
     >
       {(formik) => (
         <Page>
+          <Snackbar
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            open={snackbarOpen}
+            onClose={() => handleSnackbarClose()}
+            TransitionComponent={(p) => (<Slide {...p} direction="up" />)}
+            message={snackbarMessage}
+            autoHideDuration={3000}
+          />
           <Container>
             <Title>{t('common.brand')}</Title>
             <ContainerInput>
@@ -170,10 +220,16 @@ const Register = () => {
                 helperText={formik.touched.password && formik.errors.password}
               />
             </ContainerInput>
-            <Button variant="contained" color="primary" fullWidth onClick={formik.handleSubmit}>
+            <LoadingButton
+              pending={fetching}
+              variant="contained"
+              color="primary"
+              fullWidth
+              onClick={formik.handleSubmit}
+            >
               {t('register.primary')}
-            </Button>
-            <Link style={{textDecoration: 'unset'}} to={Routes.AUTHENTICATION.LOGIN}>
+            </LoadingButton>
+            <Link style={{ textDecoration: 'unset' }} to={Routes.AUTHENTICATION.LOGIN}>
               <Description>{t('register.alreadyUser')}</Description>
             </Link>
           </Container>

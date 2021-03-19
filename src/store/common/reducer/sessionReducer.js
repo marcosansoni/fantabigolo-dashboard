@@ -9,6 +9,7 @@ const sessionReducer = (state = new Session(), action) => {
       if (action.payload.session) {
         return action.payload.session;
       }
+      console.log(state);
       return state instanceof Session ? state : new Session(state);
     case LOGOUT:
       return new Session();

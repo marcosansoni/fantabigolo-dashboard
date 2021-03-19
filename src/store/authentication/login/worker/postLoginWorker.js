@@ -10,7 +10,6 @@ import postLoginErrorActionCreator from '../actionCreator/postLoginErrorActionCr
 import Error from '../../../../entities/Error';
 
 function* postLoginWorker(action) {
-  console.log(action);
   const {
     username,
     password,
@@ -34,7 +33,7 @@ function* postLoginWorker(action) {
   }
 
   if (status === EndpointStatus.SUCCESS) {
-    return yield put(postLoginSuccessActionCreator(new Session(data.code)));
+    return yield put(postLoginSuccessActionCreator(new Session(data)));
   }
 
   // Generic errorCode
