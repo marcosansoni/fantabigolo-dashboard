@@ -11,10 +11,11 @@ import i18n from './constants/localization/i18n';
 import Theme from './assets/Theme';
 import muiTheme from './muiTheme';
 import 'react-perfect-scrollbar/dist/css/styles.css';
+import themeSelector from './store/state/navbar/theme/selectors/themeSelector';
 
 const store = configureStore();
 
-const themeMode = store.getState().ui.theme;
+const themeMode = themeSelector(store.getState());
 
 ReactDOM.render(
   <I18nextProvider i18n={i18n}>

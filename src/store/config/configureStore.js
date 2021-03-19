@@ -11,7 +11,7 @@ import rootReducer from './rootReducer';
 const saveState = (state) => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem('state', serializedState);
+    localStorage.setItem('fantabigolo', serializedState);
   } catch {
     // ignore write errors
   }

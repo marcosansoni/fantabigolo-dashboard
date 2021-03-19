@@ -4,11 +4,11 @@ import sessionSelector from '../../state/common/selectors/sessionSelector';
 
 function* deleteData({ url, data }) {
   // Get the session used for api call
-  const sessionID = yield select(sessionSelector);
+  const session = yield select(sessionSelector);
 
   return yield axios.delete(url, {
     headers: {
-      sessionID,
+      sessionID: session.code,
       ...data,
     },
   })

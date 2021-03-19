@@ -33,7 +33,7 @@ function* postLoginWorker(action) {
   }
 
   if (status === EndpointStatus.SUCCESS) {
-    return yield put(postLoginSuccessActionCreator(new Session(data)));
+    return yield put(postLoginSuccessActionCreator(new Session({...data, username})));
   }
 
   // Generic errorCode

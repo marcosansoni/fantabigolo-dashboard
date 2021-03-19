@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AccountCircle } from '@material-ui/icons';
 import { AppBar, IconButton, MenuItem, Popover, Toolbar } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +9,8 @@ import { Link, useHistory } from 'react-router-dom';
 import Font from '../../../assets/Font';
 import logoutActionCreator from '../../../store/state/authentication/logout/actionCreator/logoutActionCreator';
 import Routes from '../../../route/Routes';
+import { useUser } from '../../../store/state/navbar/user/selectors/userSelector';
+import getUserActionCreator from '../../../store/state/navbar/user/actionCreator/getUserActionCreator';
 
 const Content = styled.div`
   width: 100%;
@@ -39,6 +41,13 @@ const NavBar = (props) => {
   const menuRef = useRef();
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useUser();
+
+  useEffect(() => {
+    if (!user.isValid) {
+      dispatch(getUserActionCreator());
+    }
+  }, [user]);
 
   const handleLogout = () => {
     dispatch(logoutActionCreator());
