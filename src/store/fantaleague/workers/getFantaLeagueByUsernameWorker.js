@@ -1,5 +1,5 @@
 import { put, select } from 'redux-saga/effects';
-import PathAPI, { urlFactory } from '../../../constants/PathAPI';
+import Endpoint, { urlFactory } from '../../constants/Endpoint';
 import getData from '../../utils/fetchMethod/getData';
 import sessionSelector from '../../session/selectors/sessionSelector';
 import actionCreator from '../../utils/actionCreator';
@@ -19,7 +19,7 @@ function* getFantaLeagueByUsernameWorker(action) {
 
     const data = { username };
 
-    const response = yield getData({ url: urlFactory(PathAPI.USER.PARTICIPANT), data });
+    const response = yield getData({ url: urlFactory(Endpoint.USER.PARTICIPANT), data });
 
     console.log(response);
 

@@ -1,5 +1,5 @@
 import getData from '../../utils/fetchMethod/getData';
-import PathAPI, { urlFactory } from '../../../constants/PathAPI';
+import Endpoint, { urlFactory } from '../../constants/Endpoint';
 
 const normalizedTrainer = (response) => {
   if (response?.status === 200 && response?.data) {
@@ -33,22 +33,22 @@ const normalizedPlayer = (response) => {
 
 function* getFantateamMethod(fantateamId, role, isTrequartista) {
   const trainer = yield getData({
-    url: urlFactory(PathAPI.FANTATEAM.TRAINER),
+    url: urlFactory(Endpoint.FANTATEAM.TRAINER),
     data: { fantateamID: fantateamId },
   });
 
   const balance = yield getData({
-    url: urlFactory(PathAPI.FANTATEAM.BALANCE),
+    url: urlFactory(Endpoint.FANTATEAM.BALANCE),
     data: { fantateamID: fantateamId },
   });
 
   const cash = yield getData({
-    url: urlFactory(PathAPI.FANTATEAM.CASH),
+    url: urlFactory(Endpoint.FANTATEAM.CASH),
     data: { fantateamID: fantateamId },
   });
 
   const player = yield getData({
-    url: urlFactory(PathAPI.FANTATEAM.PLAYER),
+    url: urlFactory(Endpoint.FANTATEAM.PLAYER),
     data: {
       fantateamID: fantateamId,
       ...(role && { role }),

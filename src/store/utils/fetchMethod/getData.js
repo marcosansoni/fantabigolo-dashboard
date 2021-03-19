@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { select } from 'redux-saga/effects';
-import sessionSelector from '../../session/selectors/sessionSelector';
+import sessionSelector from '../../state/common/selectors/sessionSelector';
 
 function* getData({ url, data, session: customSession = undefined }) {
   // Get the session used for api call
-  const { session: sessionID } = yield select(sessionSelector);
+  const sessionID = yield select(sessionSelector);
 
   return yield axios.get(
     url,

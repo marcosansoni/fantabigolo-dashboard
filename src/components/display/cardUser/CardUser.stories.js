@@ -10,7 +10,7 @@ export default {
   args: {
     title: 'Title',
     subtitle: 'Subtitle',
-    renderAction: () => <><div>Action</div><div>Action 2</div></>
+    renderAction: () => <><div>Action</div><div>Action 2</div></>,
   },
 };
 

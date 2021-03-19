@@ -1,10 +1,13 @@
 const Routes = {
-  LOGIN: '/login',
-  LOGOUT: '/logout',
+  AUTHENTICATION: {
+    LOGIN: '/login',
+    LOGOUT: '/logout',
+    REGISTER: '/register',
+  },
   HOME: '/',
   SETTINGS: '/settings',
-  REGISTER: '/register',
   FANTALEAGUE: {
+    LIST: '/fantaleague/list',
     HOME: '/fantaleague',
     NEW: '/fantaleague/new',
     HOME_LEAGUE: '/fantaleague/:leagueId',

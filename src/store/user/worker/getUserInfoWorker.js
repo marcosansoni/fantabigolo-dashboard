@@ -1,7 +1,7 @@
 import { put } from 'redux-saga/effects';
 import Severity from '../../message/constants/Severity';
 import getData from '../../utils/fetchMethod/getData';
-import PathAPI, { urlFactory } from '../../../constants/PathAPI';
+import Endpoint, { urlFactory } from '../../constants/Endpoint';
 import actionCreator from '../../utils/actionCreator';
 import UserActionType from '../UserActionType';
 import MessageActionType from '../../message/MessageActionType';
@@ -12,7 +12,7 @@ function* getUserInfoWorker(action) {
   } = action?.payload || {};
 
   const response = yield yield getData({
-    url: urlFactory(PathAPI.USER.ALL),
+    url: urlFactory(Endpoint.USER.ALL),
     data: { username },
   });
 
