@@ -6,11 +6,15 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import LoadingButton from '@material-ui/lab/LoadingButton';
 import PageHeaderTitle from '../../../components/display/pageHeader/PageHeaderTitle';
 import BottomBar from '../../../components/display/bottomBar/BottomBar';
 import NavBar from '../../../components/display/navBar/NavBar';
-import Page from '../../../components/display/navBar/Page';
+import ScrollablePage from '../../../components/display/navBar/ScrollablePage';
 import Routes from '../../../route/Routes';
+import { useFetchType } from '../../../store/state/common/selectors/fetchSelector';
+import postFantaleagueNewActionCreator, { POST_FANTALEAGUE_NEW } from '../../../store/state/fantaleague/fantaleagueNew/actionCreator/postFantaleagueNewActionCreator';
 
 const Description = styled.div`
   font-size: 16px;
@@ -61,9 +65,14 @@ const validationSchema = (t) => Yup.object({
 const FantaleagueNew = () => {
   const { t } = useTranslation();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const fetching = useFetchType(POST_FANTALEAGUE_NEW);
 
   const handleSubmit = (formik) => {
-    console.log(formik);
+    const { fantateam, fantaleague, visibility, participants, competition } = formik;
+    dispatch(postFantaleagueNewActionCreator({
+      fantateam, fantaleague, visibility, participants, competition,
+    }));
   };
 
   // Back to the list of all the fantaleague
@@ -76,7 +85,7 @@ const FantaleagueNew = () => {
   return (
     <>
       <NavBar />
-      <Page>
+      <ScrollablePage>
         <Container>
           <PageHeaderTitle
             title={t('fantaleague.new.title')}
@@ -135,8 +144,8 @@ const FantaleagueNew = () => {
                           helperText={t('fantaleague.new.helperText.visibility')}
                         >
                           <MenuItem value={0}>{t('fantaleague.new.options.visibility.close')}</MenuItem>
-                          <MenuItem value={1}>{t('fantaleague.new.options.visibility.options1')}</MenuItem>
-                          <MenuItem value={2}>{t('fantaleague.new.options.visibility.options2')}</MenuItem>
+                          <MenuItem value={1}>{t('fantaleague.new.options.visibility.friend')}</MenuItem>
+                          <MenuItem value={2}>{t('fantaleague.new.options.visibility.open')}</MenuItem>
                         </TextField>
                       </ContainerInput>
                       <ContainerInput>
@@ -183,18 +192,20 @@ const FantaleagueNew = () => {
                     onClick={handleCancel}
                   >{t('fantaleague.new.cancel')}
                   </Button>
-                  <Button
+                  <LoadingButton
+                    pending={fetching}
                     variant="contained"
                     color="primary"
                     onClick={formik.handleSubmit}
-                  >{t('fantaleague.new.primary')}
-                  </Button>
+                  >
+                    {t('fantaleague.new.primary')}
+                  </LoadingButton>
                 </BottomBar>
               </>
             )}
           </Formik>
         </Container>
-      </Page>
+      </ScrollablePage>
     </>
   );
 };

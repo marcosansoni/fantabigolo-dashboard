@@ -8,7 +8,7 @@ import Tabs from '../../../components/display/tab/Tabs';
 import Tab from '../../../components/display/tab/Tab';
 import Routes from '../../../route/Routes';
 import NavBar from '../../../components/display/navBar/NavBar';
-import Page from '../../../components/display/navBar/Page';
+import ScrollablePage from '../../../components/display/navBar/ScrollablePage';
 
 const StyledLink = styled(Link)`
   color: inherit;
@@ -21,7 +21,7 @@ const FantaleagueList = () => {
   return (
     <>
       <NavBar />
-      <Page>
+      <ScrollablePage>
         <PageHeaderTitle
           title={t('fantaleague.list.title')}
           rightContent={(
@@ -36,7 +36,7 @@ const FantaleagueList = () => {
             <Tab label={t('fantaleague.list.tabs.recent')} />
           </Tabs>
         </PageHeaderTitle>
-      </Page>
+      </ScrollablePage>
     </>
 
   );

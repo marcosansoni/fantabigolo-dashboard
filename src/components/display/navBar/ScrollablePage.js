@@ -1,3 +1,4 @@
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -9,7 +10,6 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
-  overflow: hidden;
 
   ${MediaQuerySelector.SMALL} {
     margin-top: -56px;
@@ -22,7 +22,9 @@ const ScrollablePage = (props) => {
 
   return (
     <Container style={style} className={className}>
-      {children}
+      <PerfectScrollbar>
+        {children}
+      </PerfectScrollbar>
     </Container>
   );
 };

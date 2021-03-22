@@ -5,15 +5,16 @@ const Routes = {
     REGISTER: '/register',
   },
   HOME: '/',
-  SETTINGS: '/settings',
   FANTALEAGUE: {
     LIST: '/fantaleague/list',
     HOME: '/fantaleague',
     NEW: '/fantaleague/new',
     HOME_LEAGUE: '/fantaleague/:leagueId',
-  },
-  REAL_WORLD: {
-    HOME: '/real-world',
+    SETTINGS: {
+      INDEX: '/fantaleague/:leagueId/settings',
+      GENERAL: '/fantaleague/:leagueId/settings/general',
+      GAME: '/fantaleague/:leagueId/settings/game',
+    },
   },
 };
 

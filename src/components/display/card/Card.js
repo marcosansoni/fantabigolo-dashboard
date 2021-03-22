@@ -12,7 +12,7 @@ const Container = styled.div`
   transition: transform .2s linear,box-shadow .2s linear;
   cursor: ${(p) => p.clickable && 'pointer'};
   background-color: ${(p) => (p.selected ? p.theme[Color.PRIMARY_DARK] : p.theme[Color.BACKGROUND])};
-  color: ${(p) => (p.selected ? p.theme[Color.BACKGROUND] : p.theme[Color.DARK_TEXT])};
+  color: ${(p) => (p.selected ? p.theme[Color.BACKGROUND] : p.theme[Color.TEXT_DARK])};
   
   :hover{
      transform: scale(1.05);
@@ -21,10 +21,10 @@ const Container = styled.div`
 `;
 
 const Card = (props) => {
-  const { children, style, className, clickable, selected } = props;
+  const { children, style, className, clickable, selected, onClick } = props;
 
   return (
-    <Container clickable={clickable} style={style} className={className} selected={selected}>
+    <Container clickable={clickable} style={style} className={className} selected={selected} onClick={onClick}>
       {children}
     </Container>
   );
@@ -36,6 +36,7 @@ Card.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   clickable: PropTypes.bool,
   selected: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 Card.defaultProps = {
@@ -43,6 +44,7 @@ Card.defaultProps = {
   className: undefined,
   clickable: false,
   selected: false,
+  onClick: undefined,
 };
 
 export default Card;

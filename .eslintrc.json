@@ -25,6 +25,7 @@
         "react/no-unescaped-entities": "off",
         "react/jsx-one-expression-per-line": "off",
         "camelcase": "off",
+        "import/no-extraneous-dependencies": "off",
         "max-len": "off"
     }
 }

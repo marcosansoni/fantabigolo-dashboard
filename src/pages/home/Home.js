@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import NavBar from '../../components/display/navBar/NavBar';
 import Color from '../../assets/Color';
-import Page from '../../components/display/navBar/Page';
+import ScrollablePage from '../../components/display/navBar/ScrollablePage';
 import Routes from '../../route/Routes';
 
 const Center = styled.div`
@@ -32,11 +32,11 @@ const Home = () => {
           {t('home.navbar.fantaleague')}
         </StyledLink>
       </NavBar>
-      <Page>
+      <ScrollablePage>
         <Center>
           The best is yet to come
         </Center>
-      </Page>
+      </ScrollablePage>
     </>
   );
 };

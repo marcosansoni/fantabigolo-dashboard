@@ -47,8 +47,8 @@ export default {
     options: {
       visibility: {
         close: 'Chiuso',
-        options1: 'options1',
-        options2: 'options2',
+        friend: 'Solo amici',
+        open: 'Pubblico',
       },
       competition: {
         classic: 'Classico',
@@ -60,5 +60,12 @@ export default {
     },
     primary: 'Crea',
     cancel: 'Annulla',
+  },
+  details: {
+    settings: {
+      title: 'Impostazioni',
+      general: 'Generali',
+      game: 'Gioco',
+    },
   },
 };
