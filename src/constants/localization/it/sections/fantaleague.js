@@ -31,10 +31,12 @@ export default {
       fantateam: {
         default: 'Inserisci il nome del tuo fantateam',
         required: 'Il nome del fantateam é obbligatorio',
+        minimum: 'Il nome del fantateam deve avere almeno 4 caratteri',
       },
       fantaleague: {
         default: 'Inserisci il nome della fantalega',
         required: 'Il nome della fantalega é obbligatorio',
+        minimum: 'Il nome del fantalega deve avere almeno 4 caratteri',
       },
       participants: {
         default: 'Inserisci il numero dei partecipanti',
@@ -51,7 +53,7 @@ export default {
       competition: {
         classic: 'Classico',
         simplified: 'Semplificato',
-        f1: 'f1',
+        f1: 'F1',
         knockout: 'Eliminazione',
         champions: 'Champions League',
       },

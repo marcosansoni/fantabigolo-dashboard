@@ -31,7 +31,9 @@ function* getUserWorker() {
   }
 
   if (status === EndpointStatus.SUCCESS) {
-    return yield put(getUserSuccessActionCreator(new User(data)));
+    const user = new User();
+    user.mapApi(data);
+    return yield put(getUserSuccessActionCreator(user));
   }
 
   // Generic errorCode

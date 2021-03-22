@@ -1,5 +1,3 @@
-import { select } from 'redux-saga/effects';
-import userSelector from '../../user/selectors/userSelector';
 import getFantaLeagueByUsernameWorker from './getFantaLeagueByUsernameWorker';
 
 function* createFantaLeagueWorker() {
@@ -27,11 +25,11 @@ function* createFantaLeagueWorker() {
 
     // const response = yield postData({ url: urlFactory(PathAPI.FANTALEAGUE.NEW), data });
 
-    const user = yield select(userSelector);
+    // const user = yield select(userSelector);
+    //
+    // const { username } = user;
 
-    const { username } = user;
-
-    yield getFantaLeagueByUsernameWorker({ payload: username });
+    yield getFantaLeagueByUsernameWorker({ payload: 'should be the username' });
 
     // if(response?.status === 200){
     //

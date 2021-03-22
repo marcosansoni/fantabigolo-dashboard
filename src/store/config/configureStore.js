@@ -19,7 +19,7 @@ const saveState = (state) => {
 
 const loadState = () => {
   try {
-    const serializedState = localStorage.getItem('state');
+    const serializedState = localStorage.getItem('fantabigolo');
     if (serializedState === null) {
       return undefined;
     }

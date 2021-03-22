@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AccountCircle } from '@material-ui/icons';
-import { AppBar, IconButton, MenuItem, Popover, Toolbar } from '@material-ui/core';
+import { AppBar, IconButton, Popover, Toolbar } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -11,6 +11,9 @@ import logoutActionCreator from '../../../store/state/authentication/logout/acti
 import Routes from '../../../route/Routes';
 import { useUser } from '../../../store/state/navbar/user/selectors/userSelector';
 import getUserActionCreator from '../../../store/state/navbar/user/actionCreator/getUserActionCreator';
+import { useUserError } from '../../../store/state/navbar/user/selectors/userErrorSelector';
+import getUserErrorActionCreator from '../../../store/state/navbar/user/actionCreator/getUserErrorActionCreator';
+import ProfileDropdown from './fragments/ProfileDropdown';
 
 const Content = styled.div`
   width: 100%;
@@ -20,10 +23,6 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-`;
-
-const ContainerUserMenu = styled.div`
-  //width: 200px;
 `;
 
 const StyledLink = styled(Link)`
@@ -42,12 +41,18 @@ const NavBar = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useUser();
+  const userError = useUserError();
 
   useEffect(() => {
     if (!user.isValid) {
       dispatch(getUserActionCreator());
     }
   }, [user]);
+
+  // Clean errors associated at navbar when unmount
+  useEffect(() => () => {
+    if (userError.length) dispatch(getUserErrorActionCreator([]));
+  }, []);
 
   const handleLogout = () => {
     dispatch(logoutActionCreator());
@@ -90,14 +95,7 @@ const NavBar = (props) => {
           onClose={() => setIsUserMenuOpen(false)}
           disableRestoreFocus
         >
-          <ContainerUserMenu>
-            <MenuItem
-              style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}
-              onClick={handleLogout}
-            >
-              {t('common.logout')}
-            </MenuItem>
-          </ContainerUserMenu>
+          <ProfileDropdown onLogout={handleLogout} />
         </Popover>
       </Toolbar>
     </AppBar>

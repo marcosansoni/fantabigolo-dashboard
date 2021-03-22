@@ -5,10 +5,12 @@ import { Button, MenuItem, TextField } from '@material-ui/core';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { useHistory } from 'react-router-dom';
 import PageHeaderTitle from '../../../components/display/pageHeader/PageHeaderTitle';
 import BottomBar from '../../../components/display/bottomBar/BottomBar';
 import NavBar from '../../../components/display/navBar/NavBar';
 import Page from '../../../components/display/navBar/Page';
+import Routes from '../../../route/Routes';
 
 const Description = styled.div`
   font-size: 16px;
@@ -51,20 +53,22 @@ const initialValues = {
 };
 
 const validationSchema = (t) => Yup.object({
-  fantateam: Yup.string(t('fantaleague.new.errors.fantateam.default')).required(t('fantaleague.new.errors.fantateam.required')),
-  fantaleague: Yup.string(t('fantaleague.new.errors.fantaleague.default')).required(t('fantaleague.new.errors.fantaleague.required')),
+  fantateam: Yup.string(t('fantaleague.new.errors.fantateam.default')).required(t('fantaleague.new.errors.fantateam.required')).min(4, t('fantaleague.new.errors.fantateam.minimum')),
+  fantaleague: Yup.string(t('fantaleague.new.errors.fantaleague.default')).required(t('fantaleague.new.errors.fantaleague.required')).min(4, t('fantaleague.new.errors.fantaleague.minimum')),
   participants: Yup.number(t('fantaleague.new.errors.participants.default')).required(t('fantaleague.new.errors.participants.required')).min(1, t('fantaleague.new.errors.participants.minimum')),
 });
 
 const FantaleagueNew = () => {
   const { t } = useTranslation();
+  const history = useHistory();
 
-  const handleSubmit = () => {
-    // console.log(formik);
+  const handleSubmit = (formik) => {
+    console.log(formik);
   };
 
+  // Back to the list of all the fantaleague
   const handleCancel = () => {
-    // console.log('Cancel');
+    history.push(Routes.FANTALEAGUE.LIST);
   };
 
   const validationSchemaFormik = useMemo(() => validationSchema(t), []);

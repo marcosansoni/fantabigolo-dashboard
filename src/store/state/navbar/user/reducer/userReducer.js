@@ -6,7 +6,7 @@ import User from '../../../../../entities/User';
 const userReducer = (state = new User(), action) => {
   switch (action.type) {
     case actionStatusSuccess(GET_USER):
-      if (action.payload.session) {
+      if (action.payload.user) {
         return action.payload.user;
       }
       return state instanceof User ? state : new User(state);

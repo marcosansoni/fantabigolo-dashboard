@@ -21,9 +21,7 @@ const Routing = () => {
   return (
     <Page>
       <BrowserRouter>
-        {!session && (
-          <Redirect to={Routes.AUTHENTICATION.LOGIN} />
-        )}
+        {!session.isValid && (<Redirect to={Routes.AUTHENTICATION.LOGIN} />)}
         {/* <Route exact path={Routes.AUTHENTICATION.LOGOUT}> */}
         {/*  <Logout /> */}
         {/* </Route> */}
