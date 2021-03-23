@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Color from '../../../assets/Color';
-import Card from '../card/Card';
-import Heading4 from '../../typography/heading/Heading4';
-import Label from '../label/Label';
-import Paragraph14 from '../../typography/paragraph/Paragraph14';
-import Paragraph12 from '../../typography/paragraph/Paragraph12';
+import Color from '../../../../assets/Color';
+import Card from '../Card';
+import Heading4 from '../../../typography/heading/Heading4';
+import LabelCard from '../labelCard/LabelCard';
+import Paragraph14 from '../../../typography/paragraph/Paragraph14';
+import Paragraph12 from '../../../typography/paragraph/Paragraph12';
 
 const Container = styled.div`
   display: flex;
@@ -67,13 +67,13 @@ const MatchCard = (props) => {
       </Heading4>
       <Container>
         <div style={{ minWidth: 300 }}>
-          <Label
+          <LabelCard
             title={home?.team}
             subtitle={home?.trainer}
             logo={home?.logo}
             rightContent={renderResult(home)}
           />
-          <Label
+          <LabelCard
             style={{ paddingTop: 24 }}
             title={away?.team}
             subtitle={away?.trainer}

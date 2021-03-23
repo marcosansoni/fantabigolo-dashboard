@@ -2,7 +2,7 @@ import React from 'react';
 import MatchCard from './MatchCard';
 
 export default {
-  title: 'Display/MatchCard',
+  title: 'components/display/card/MatchCard',
   component: MatchCard,
   argTypes: {
     children: 'string',
@@ -30,3 +30,4 @@ export const Default = Template.bind({});
 Default.args = {
   children: 'Text',
 };
+Default.storyName = 'MatchCard';

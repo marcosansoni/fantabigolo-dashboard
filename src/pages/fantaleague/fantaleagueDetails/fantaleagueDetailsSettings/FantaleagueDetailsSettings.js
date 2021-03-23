@@ -12,6 +12,7 @@ import Font from '../../../../assets/Font';
 import Page from '../../../../components/display/navBar/Page';
 import PageHeaderTitle from '../../../../components/display/pageHeader/PageHeaderTitle';
 import Routes from '../../../../route/Routes';
+import GeneralSettingsForm from './form/GeneralSettingsForm';
 
 const Container = styled.div`
   width: 100%;
@@ -112,7 +113,7 @@ const FantaleagueDetailsSettings = (props) => {
               <PerfectScrollbar>
                 <Switch>
                   <Route path={Routes.FANTALEAGUE.SETTINGS.GENERAL} exact>
-                    <div>General</div>
+                    <GeneralSettingsForm />
                   </Route>
                   <Route path={Routes.FANTALEAGUE.SETTINGS.GAME} exact>
                     <div>Game</div>

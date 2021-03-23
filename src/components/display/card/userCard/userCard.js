@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Color from '../../../assets/Color';
-import Card from '../card/Card';
-import Label from '../label/Label';
+import Color from '../../../../assets/Color';
+import Card from '../Card';
+import LabelCard from '../labelCard/LabelCard';
 
 const ContainerActions = styled.div`
   background-color: ${(p) => p.theme[Color.BACKGROUND]};
@@ -21,13 +21,13 @@ const Content = styled.div`
   justify-content: space-between;
 `;
 
-const CardUser = (props) => {
-  const { style, className, title, subtitle, image, renderAction, ...cardProps } = props;
+const UserCard = (props) => {
+  const { style, className, title, subtitle, icon, renderAction, ...cardProps } = props;
 
   return (
     <Card style={style} className={className} {...cardProps}>
       <Content>
-        <Label title={title} subtitle={subtitle} image={image} />
+        <LabelCard title={title} subtitle={subtitle} icon={icon} />
         {renderAction && (
           <ContainerActions>{renderAction()}</ContainerActions>
         )}
@@ -36,22 +36,22 @@ const CardUser = (props) => {
   );
 };
 
-CardUser.propTypes = {
+UserCard.propTypes = {
   style: PropTypes.object,
   className: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string,
-  image: PropTypes.string,
+  icon: PropTypes.any,
   renderAction: PropTypes.func,
 };
 
-CardUser.defaultProps = {
+UserCard.defaultProps = {
   style: undefined,
   className: undefined,
   title: undefined,
   subtitle: undefined,
-  image: undefined,
+  icon: undefined,
   renderAction: undefined,
 };
 
-export default CardUser;
+export default UserCard;

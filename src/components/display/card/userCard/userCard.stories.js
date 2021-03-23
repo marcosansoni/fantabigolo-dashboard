@@ -1,9 +1,9 @@
 import React from 'react';
-import CardUser from './CardUser';
+import UserCard from './userCard';
 
 export default {
-  title: 'Display/CardUser',
-  component: CardUser,
+  title: 'components/display/card/UserCard',
+  component: UserCard,
   argTypes: {
     children: 'string',
   },
@@ -14,9 +14,7 @@ export default {
   },
 };
 
-const Template = (args) => <CardUser {...args} />;
+const Template = (args) => <UserCard {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
-  children: 'Text',
-};
+Default.storyName = 'UserCard';
