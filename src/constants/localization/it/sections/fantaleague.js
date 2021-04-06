@@ -68,6 +68,24 @@ export default {
       game: 'Gioco',
       tab: {
         general: {
+          placeholder: {
+            initialBudget: 'Budget',
+            visibility: 'Visibilitá',
+            participants: 'Partecipanti',
+            auction: 'Modalità d\'asta',
+          },
+          helperText: {
+            initialBudget: 'Milioni iniziali per ogni fantateam',
+            visibility: 'Le possibili visibilità del campionato',
+            participants: 'Il numero di partecipanti della fantalega',
+            repeatedPlayer: 'Puoi abilitare o disabilitare la possibilità di avere stessi giocatori in più fantateam',
+            auction: 'Possibili opzioni per l\'asta',
+          },
+          options: {
+            auction: {
+              bid: 'Asta',
+            },
+          },
           errors: {
             participants: {
               default: 'Inserisci il numero dei partecipanti',
@@ -129,6 +147,10 @@ export default {
             description: 'Per una fantalega sono consentiti non più di due admin',
             button: 'Aggiungi',
             noPermissionButton: 'Solo un admin puó aggiungerne un altro',
+            dialog: {
+              title: 'Aggiungi un admin',
+              primary: 'Aggiungi',
+            },
           },
         },
       },

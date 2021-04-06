@@ -1,6 +1,6 @@
 import React from 'react';
 import GeneralSettingsFormAdmin from './GeneralSettingsFormAdmin';
-import User from '../../../../../../entities/User';
+import User from '../../../../../../../entities/User';
 
 export default {
   title: 'pages/fantaleague/fantaleagueDetails/fantaleagueDetailsSettings/form/generalSettingsForm/GeneralSettingsFormAdmin',

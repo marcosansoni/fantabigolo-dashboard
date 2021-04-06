@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import LoadingButton from '@material-ui/lab/LoadingButton';
 import { Skeleton } from '@material-ui/lab';
-import Color from '../../../../../../assets/Color';
-import UserCard from '../../../../../../components/display/card/userCard/userCard';
+import Color from '../../../../../../../assets/Color';
+import UserCard from '../../../../../../../components/display/card/userCard/userCard';
 
 const Container = styled.div`
   width: 100%;

@@ -187,6 +187,7 @@ const FantaleagueNew = () => {
                 </Form>
                 <BottomBar style={{ justifyContent: 'flex-end' }}>
                   <Button
+                    color="secondary"
                     style={{ marginRight: 16 }}
                     variant="contained"
                     onClick={handleCancel}

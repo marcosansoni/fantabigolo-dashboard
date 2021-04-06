@@ -18,10 +18,11 @@ const muiTheme = (themeMode) => {
         // contrastText: theme[Color.PRIMARY_DARK],
       },
       // secondary: {
-      // main: theme[Color.PRIMARY_DARK],
-      // light: colors.tiffany200,
-      // dark: colors.tiffany400,
-      // contrastText: colors.white,
+      // background: theme[Color.TEXT_DARK],
+      // main: theme[Color.BACKGROUND],
+      // light: theme[Color.TEXT_LIGHT],
+      // dark: theme[Color.TEXT_DARK],
+      // contrastText: theme[Color.SUBTITLE],
       // },
     },
     typography: {

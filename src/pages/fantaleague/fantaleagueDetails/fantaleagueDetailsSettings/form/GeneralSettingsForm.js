@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { Formik } from 'formik';
 import styled from 'styled-components';
+import GeneralSettingsFormFantaleague from './generalSettingsForm/GeneralSettingsFormFantaleague';
 
 const Container = styled.div`
   display: flex;
@@ -75,9 +76,9 @@ const GeneralSettingsForm = () => {
       validationSchema={validationSchemaFormik}
       onSubmit={handleSubmit}
     >
-      {(formik) => (
+      {() => (
         <Container>
-          {console.log(formik)}
+          <GeneralSettingsFormFantaleague />
         </Container>
       )}
     </Formik>
