@@ -4,12 +4,20 @@ import { useTranslation } from 'react-i18next';
 import { Formik } from 'formik';
 import styled from 'styled-components';
 import GeneralSettingsFormFantaleague from './generalSettingsForm/GeneralSettingsFormFantaleague';
+import GeneralSettingsFormTeamComposition from './generalSettingsForm/GeneralSettingsFormTeamComposition';
+import GeneralSettingsFormAdmin from './generalSettingsForm/generalSettingsFormAdmin/GeneralSettingsFormAdmin';
+import GeneralSettingsFormStatus from './generalSettingsForm/GeneralSettingsFormStatus';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding-right: 24px;
   width: 100%;
+`;
+
+const SectionSeparator = styled.div`
+  width: 100%;
+  height: 24px;
 `;
 
 const initialValues = {
@@ -37,28 +45,26 @@ const validationSchema = (t) => Yup.object({
     .min(1, t('fantaleague.details.settings.tab.general.errors.initialBudget.minimum')),
   allowsAttackingMidfielder: Yup.boolean(),
   repeatedPlayer: Yup.boolean(),
-  playerComposition: Yup.object({
-    goalkeeper: Yup.number(t('fantaleague.details.settings.tab.general.errors.goalkeeper.default'))
-      .required(t('fantaleague.details.settings.tab.general.errors.goalkeeper.required'))
-      .min(1, t('fantaleague.details.settings.tab.general.errors.goalkeeper.minimum')),
-    defender: Yup.number(t('fantaleague.details.settings.tab.general.errors.defender.default'))
-      .required(t('fantaleague.details.settings.tab.general.errors.defender.required'))
-      .min(1, t('fantaleague.details.settings.tab.general.errors.defender.minimum')),
-    midfielder: Yup.number(t('fantaleague.details.settings.tab.general.errors.midfielder.default'))
-      .required(t('fantaleague.details.settings.tab.general.errors.midfielder.required'))
-      .min(1, t('fantaleague.details.settings.tab.general.errors.midfielder.minimum')),
-    attackingMidfielder: Yup.number()
-      .when('allowsAttackingMidfielder', {
-        is: true,
-        then: Yup.number(t('fantaleague.details.settings.tab.general.errors.attackingMidfielder.default'))
-          .required(t('fantaleague.details.settings.tab.general.errors.attackingMidfielder.required'))
-          .min(1, t('fantaleague.details.settings.tab.general.errors.attackingMidfielder.minimum')),
-        otherwise: Yup.number(),
-      }),
-    striker: Yup.number(t('fantaleague.details.settings.tab.general.errors.striker.default'))
-      .required(t('fantaleague.details.settings.tab.general.errors.striker.required'))
-      .min(1, t('fantaleague.details.settings.tab.general.errors.striker.minimum')),
-  }),
+  goalkeeper: Yup.number(t('fantaleague.details.settings.tab.general.errors.goalkeeper.default'))
+    .required(t('fantaleague.details.settings.tab.general.errors.goalkeeper.required'))
+    .min(1, t('fantaleague.details.settings.tab.general.errors.goalkeeper.minimum')),
+  defender: Yup.number(t('fantaleague.details.settings.tab.general.errors.defender.default'))
+    .required(t('fantaleague.details.settings.tab.general.errors.defender.required'))
+    .min(1, t('fantaleague.details.settings.tab.general.errors.defender.minimum')),
+  midfielder: Yup.number(t('fantaleague.details.settings.tab.general.errors.midfielder.default'))
+    .required(t('fantaleague.details.settings.tab.general.errors.midfielder.required'))
+    .min(1, t('fantaleague.details.settings.tab.general.errors.midfielder.minimum')),
+  attackingMidfielder: Yup.number()
+    .when('allowsAttackingMidfielder', {
+      is: true,
+      then: Yup.number(t('fantaleague.details.settings.tab.general.errors.attackingMidfielder.default'))
+        .required(t('fantaleague.details.settings.tab.general.errors.attackingMidfielder.required'))
+        .min(1, t('fantaleague.details.settings.tab.general.errors.attackingMidfielder.minimum')),
+      otherwise: Yup.number(),
+    }),
+  striker: Yup.number(t('fantaleague.details.settings.tab.general.errors.striker.default'))
+    .required(t('fantaleague.details.settings.tab.general.errors.striker.required'))
+    .min(1, t('fantaleague.details.settings.tab.general.errors.striker.minimum')),
 });
 
 const GeneralSettingsForm = () => {
@@ -78,7 +84,13 @@ const GeneralSettingsForm = () => {
     >
       {() => (
         <Container>
+          <GeneralSettingsFormStatus />
+          <SectionSeparator />
+          <GeneralSettingsFormAdmin />
+          <SectionSeparator />
           <GeneralSettingsFormFantaleague />
+          <SectionSeparator />
+          <GeneralSettingsFormTeamComposition />
         </Container>
       )}
     </Formik>

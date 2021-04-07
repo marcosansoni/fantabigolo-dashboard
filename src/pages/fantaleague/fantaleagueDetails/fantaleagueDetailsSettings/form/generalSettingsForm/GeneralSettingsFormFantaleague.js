@@ -31,7 +31,12 @@ const GeneralSettingsFormFantaleague = () => {
   const formik = useFormikContext();
   const { t } = useTranslation();
 
-  console.log(t('fantaleague.details.settings.tab.general.errors.participants.default'));
+  const handleChangeAttackingMidfielder = () => {
+    if (formik.values.allowsAttackingMidfielder) {
+      formik.setFieldValue('attackingMidfielder', 0);
+    }
+    formik.setFieldValue('allowsAttackingMidfielder', !formik.values.allowsAttackingMidfielder);
+  };
 
   return (
     <Wrap>
@@ -83,15 +88,6 @@ const GeneralSettingsFormFantaleague = () => {
             : t('fantaleague.details.settings.tab.general.helperText.initialBudget')}
         />
       </ContainerInput>
-      <ContainerSwitch>
-        Giocatori ripetuti
-        <Switch
-          color="primary"
-          value={formik.values.repeatedPlayer}
-          onClick={() => formik.setFieldValue('repeatedPlayer', !formik.values.repeatedPlayer)}
-        />
-        <HelperSwitch>{t('fantaleague.details.settings.tab.general.helperText.repeatedPlayer')}</HelperSwitch>
-      </ContainerSwitch>
       <ContainerInput>
         <TextField
           select
@@ -106,6 +102,24 @@ const GeneralSettingsFormFantaleague = () => {
           <MenuItem value={0}>{t('fantaleague.details.settings.tab.general.options.auction.bid')}</MenuItem>
         </TextField>
       </ContainerInput>
+      <ContainerSwitch>
+        {t('fantaleague.details.settings.tab.general.placeholder.allowsAttackingMidfielder')}
+        <Switch
+          color="primary"
+          value={formik.values.allowsAttackingMidfielder}
+          onClick={handleChangeAttackingMidfielder}
+        />
+        <HelperSwitch>{t('fantaleague.details.settings.tab.general.helperText.allowsAttackingMidfielder')}</HelperSwitch>
+      </ContainerSwitch>
+      <ContainerSwitch>
+        {t('fantaleague.details.settings.tab.general.placeholder.repeatedPlayer')}
+        <Switch
+          color="primary"
+          value={formik.values.allowsAttackingMidfielder}
+          onClick={() => formik.setFieldValue('repeatedPlayer', !formik.values.repeatedPlayer)}
+        />
+        <HelperSwitch>{t('fantaleague.details.settings.tab.general.helperText.repeatedPlayer')}</HelperSwitch>
+      </ContainerSwitch>
     </Wrap>
   );
 };
